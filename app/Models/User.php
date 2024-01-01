@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
@@ -17,12 +18,14 @@ class User extends Authenticatable
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
@@ -34,6 +37,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $hidden = [
         'password',
         'remember_token',
@@ -46,6 +50,7 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
+
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -55,6 +60,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    
     protected $appends = [
         'profile_photo_url',
     ];
