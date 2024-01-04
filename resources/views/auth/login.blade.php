@@ -8,13 +8,13 @@
       <section>
         <div class="relative flex items-center min-h-screen p-0 overflow-hidden bg-center bg-cover">
           <div class="container z-1">
-            <div class="flex flex-wrap -mx-3">
+            <div class="flex flex-wrap ml-8 -mx-3">
 
               <div class="flex flex-col w-full max-w-full px-3 mx-auto lg:mx-0 shrink-0 md:flex-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
 
                 <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none lg:py4 dark:bg-gray-950 rounded-2xl bg-clip-border">
-                  <div class="p-6 pb-0 flex items-center space-x-3 mb-0">
-                    <img class="-ml-4" src="{{asset('assets/img/skygate-logo.png')}}" alt="logo">
+                  <div class="p-6 -ml-4 pb-0 flex flex-wrap items-center space-x-3 mb-0">
+                    <img class="" src="{{asset('assets/img/skygate-logo.png')}}" alt="logo">
                     <div>
                         <h4 class="font-bold text-2xl uppercase mb-0">Skygate International</h4>
                         <p class="font-semibold mb-0">Welcome! user, Log In now.</p>
@@ -47,10 +47,10 @@
                   <div class="p-6 pb-0 mb-0">
 
                     <h3 class="">
-                        <span class="font-bold text-6xl">Every<strong style="color:#FF8E00"> Success </strong>Story</span>
+                        <span class="font-bold text-6">Every Success Story</span>
                     </h3>
                     <h3>
-                        <span class="font-bold text-6xl"> starts with a <strong style="color:#FF8E00"> Dream! </strong></span>
+                        <span class="font-bold text-5xl"> starts with a <strong class=" text-24" style="color:#FF8E00"> Dream! </strong></span>
                     </h3>
                 
                   </div>
