@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\genaralController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +20,14 @@ Route::controller(genaralController::class)->group(function () {
     Route::get('/', 'home')->name('home');
 });
 
-Route::middleware(['auth:sanctum', 'role:Admin', config('jetstream.auth_session'), 'verified',])->group(function () {
+Route::prefix('admin')->middleware(['auth:sanctum', 'role:Admin', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::controller(dashboardController::class)->group(function () {
-        Route::get('/admin/dashboard', 'getAdminDashboard')->name('adminDashboard');
+        Route::get('/dashboard', 'getAdminDashboard')->name('adminDashboard');
+    });
+
+    Route::controller(userController::class)->group(function () {
+        Route::get('/new-user', 'getNewUser')->name('newUser');
     });
 
 });
