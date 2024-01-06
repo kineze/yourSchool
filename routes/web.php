@@ -28,6 +28,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'role:Admin', config('jetstr
 
     Route::controller(userController::class)->group(function () {
         Route::get('/new-user', 'getNewUser')->name('newUser');
+        Route::post('/store-new-user', 'storeUser')->name('storeUser');
     });
 
 });
