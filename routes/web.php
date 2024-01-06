@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\genaralController;
+use App\Http\Controllers\Office\officeDashController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +33,17 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'role:Admin', config('jetstr
     });
 
 });
+
+
+Route::prefix('office')->middleware(['auth:sanctum', 'role:Manager|Finance|Coordinator|Consultant', config('jetstream.auth_session'), 'verified',])->group(function () {
+
+    Route::controller(officeDashController::class)->group(function () {
+        Route::get('/dashboard', 'getOfficeDashboard')->name('officeDashboard');
+    });
+
+});
+
+
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', ])->group(function () {
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');

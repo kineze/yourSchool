@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -36,5 +37,26 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
+
+        $this->setHomeRoute();
+    }
+
+    /**
+     * Dynamically set the HOME constant based on user's roles.
+     */
+    private function setHomeRoute(): void
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $roles = $user->roles->pluck('name')->toArray();
+
+            if (in_array('Admin', $roles) || in_array('Super admin', $roles)) {
+                define('App\Providers\RouteServiceProvider::HOME', '/adminDashboard');
+            } elseif (array_intersect(['Manager', 'Coordinator', 'Finance', 'Consultant'], $roles)) {
+                define('App\Providers\RouteServiceProvider::HOME', '/officeDashboard');
+            } elseif (in_array('Student', $roles)) {
+                define('App\Providers\RouteServiceProvider::HOME', '/studentDashboard');
+            }
+        }
     }
 }
