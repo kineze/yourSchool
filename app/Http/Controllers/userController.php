@@ -35,9 +35,12 @@ class userController extends Controller
             }],
         ]);
 
+        $tempPass = $validatedData['password'];
+
         $user = new User();
         $user->name = $validatedData['UserName'];
         $user->email = $validatedData['email'];
+        $user->phone = $validatedData['phone'];
         $user->password = Hash::make($validatedData['password']);
         $user->save();
 
@@ -57,9 +60,36 @@ class userController extends Controller
         if (isset($validatedData['send_password_email']) && $validatedData['send_password_email']) {
             event(new SendPasswordViaEmail($user, $validatedData['password']));
         }
-    
 
-        // Redirect or respond as needed
-        return redirect()->route('your.redirect.route'); // Adjust 'your.redirect.route' to your actual route
+        $notification = [
+            'message' => 'user created succesfully',
+            'alert-type' => 'success'
+        ];
+
+        return redirect()->route('showPass', ['id' => $user->id, 'tempPass' => $tempPass])->with($notification);
     }
+
+    public function deleteUser($id){
+
+        $user = User::findOrFail($id);
+
+        if ($user->hasRole('Admin') && User::role('Admin')->count() === 1) {
+            $notification = [
+                'message' => 'Cannot delete the last admin. At least one admin should be present.',
+                'alert-type' => 'error'
+            ];
+    
+            return back()->with($notification);
+        }
+
+        $user->delete();
+
+        $notification = [
+            'message' => 'user delete successfully',
+            'alert-type' => 'error'
+        ];
+
+        return back()->with($notification);
+    }
+   
 }

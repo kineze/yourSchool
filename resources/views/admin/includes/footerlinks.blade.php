@@ -12,6 +12,7 @@
 <script src="{{asset('/assets/js/plugins/fullcalendar.min.js')}}"></script>
 <script src="{{asset('/assets/js/plugins/dropzone.min.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
     @if(Session::has('message'))

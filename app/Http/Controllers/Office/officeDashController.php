@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Office;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,12 +13,16 @@ class officeDashController extends Controller
 
         $user = Auth::user();
 
-        $userPass = $user->pass_reset;
-
-        if ($userPass == 1) {
-            
-        }
-
         return view('office.dashboard', compact('user'));
+    }
+
+    public function officeUsers(){
+
+        $rolesToQuery = ['Coordinator', 'Finance', 'Manager', 'Consultant'];
+
+        $users = User::role($rolesToQuery)->get();
+
+        dd($users);
+        
     }
 }

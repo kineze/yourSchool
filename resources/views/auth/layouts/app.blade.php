@@ -3,6 +3,6 @@
 
     @include('auth.includes.headerlinks')
         @yield('content')
-    @include('auth.includes.footerlinks')
+    @include('admin.includes.footerlinks')
 
 </html>

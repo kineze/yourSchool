@@ -19,23 +19,35 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(genaralController::class)->group(function () {
     Route::get('/', 'home')->name('home');
+    Route::get('/setdashboard', 'setDashboard')->name('setDashboard');
+    Route::get('/set-new-password', 'setNewPass')->name('setNewPass');
+    Route::post('set-new-pass', 'setNewPassword')->name('setNewPassword');
+    Route::get('/sys-users', 'sysUsers')->name('sysUsers');
+    Route::get('show-password/{id}/{tempPass}', 'showPass')->name('showPass');
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'role:Admin', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::controller(dashboardController::class)->group(function () {
         Route::get('/dashboard', 'getAdminDashboard')->name('adminDashboard');
+        Route::get('/get-user-update/{id}', 'getUpdateUser')->name('getUpdateUser');
     });
+
+});
+
+Route::middleware(['auth:sanctum', 'role:Admin|Manager','checkPasswordReset', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::controller(userController::class)->group(function () {
         Route::get('/new-user', 'getNewUser')->name('newUser');
         Route::post('/store-new-user', 'storeUser')->name('storeUser');
+        Route::post('/delete-user/{id}', 'deleteUser')->name('deleteUser');
     });
 
 });
 
 
-Route::prefix('office')->middleware(['auth:sanctum', 'role:Manager|Finance|Coordinator|Consultant', config('jetstream.auth_session'), 'verified',])->group(function () {
+
+Route::prefix('office')->middleware(['auth:sanctum', 'role:Manager|Finance|Coordinator|Consultant','checkPasswordReset', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::controller(officeDashController::class)->group(function () {
         Route::get('/dashboard', 'getOfficeDashboard')->name('officeDashboard');

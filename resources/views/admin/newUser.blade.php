@@ -4,7 +4,7 @@
 
 <div class="w-full p-6 mx-auto">
 
-    <form class="relative" enctype="multipart/form-data" id="vaccine-form"  action="{{ route('storeUser') }}" method="post">
+    <form class="relative" enctype="multipart/form-data" id="main-form"  action="{{ route('storeUser') }}" method="post">
         @csrf
         <div class="flex flex-wrap -mx-3">
             <div class="w-full max-w-full px-3 shrink-0 lg:flex-0 lg:w-6/12">
@@ -114,33 +114,45 @@
                     @endif
                     
                     <div class="grid h-fit w-full sm:grid-cols-1 gap-2">
-                        <div class="relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                            <label>
-                            <input  id="checkbox-1" name="roles[]" value="Admin" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                            <label for="checkbox-1" class="cursor-pointer select-none text-slate-700">Admin</label>
-                            </label>
-                        </div>
 
-                        <div class="relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                            <label>
-                            <input id="checkbox-2" name="roles[]" value="Manager" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                            <label for="checkbox-2" class="cursor-pointer select-none text-slate-700">Manager</label>
-                            </label>
-                        </div>
+                        @role('Admin')
+                            <div class="relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
+                                <label>
+                                <input  id="checkbox-1" name="roles[]" value="Admin" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                <label for="checkbox-1" class="cursor-pointer select-none text-slate-700">Admin</label>
+                                </label>
+                            </div>
+                            
+                            <div class="relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
+                                <label>
+                                <input id="checkbox-2" name="roles[]" value="Manager" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                <label for="checkbox-2" class="cursor-pointer select-none text-slate-700">Manager</label>
+                                </label>
+                            </div>
+                        @endrole
 
-                        <div class="relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                            <label>
-                            <input id="checkbox-3" name="roles[]" value="Cordinator" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                            <label for="checkbox-3" class="cursor-pointer select-none text-slate-700">Cordinator</label>
-                            </label>
-                        </div>
+                        @role('Admin|Manager')
+                            <div class="relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
+                                <label>
+                                <input id="checkbox-3" name="roles[]" value="Coordinator" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                <label for="checkbox-3" class="cursor-pointer select-none text-slate-700">Coordinator</label>
+                                </label>
+                            </div>
 
-                        <div class="relative flex {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                            <label>
-                            <input id="checkbox-4" name="roles[]" value="Consultant" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                            <label for="checkbox-4" class="cursor-pointer select-none text-slate-700">Consultant</label>
-                            </label>
-                        </div>
+                            <div class="relative flex {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
+                                <label>
+                                <input id="checkbox-4" name="roles[]" value="Consultant" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                <label for="checkbox-4" class="cursor-pointer select-none text-slate-700">Consultant</label>
+                                </label>
+                            </div>
+
+                            <div class="relative flex {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
+                                <label>
+                                <input id="checkbox-4" name="roles[]" value="Finance" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                <label for="checkbox-4" class="cursor-pointer select-none text-slate-700">Finance</label>
+                                </label>
+                            </div>
+                        @endrole
 
 
                     </div>
