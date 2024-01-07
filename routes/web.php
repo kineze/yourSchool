@@ -34,6 +34,9 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'role:Admin', config('jetstr
     Route::controller(dashboardController::class)->group(function () {
         Route::get('/dashboard', 'getAdminDashboard')->name('adminDashboard');
         Route::get('/time-slots', 'getTimeSlots')->name('getTimeSlots');
+        Route::post('new-time-slots', 'newTimeSlot')->name('newTimeSlot');
+        Route::post('/update-user{id}', 'updateTimeSlot')->name('updateTimeSlot');
+        Route::post('destroy-timieslot/{id}', 'destroytimeSlot')->name('destroytimeSlot');
     });
 
 });

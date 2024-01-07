@@ -209,4 +209,6 @@ class genaralController extends Controller
 
         return redirect()->back()->with($notification);
     }
+
+    
 }
