@@ -16,4 +16,9 @@ class dashboardController extends Controller
         return view('admin.Dashboard', compact('user'));
     }
 
+    public function getTimeSlots(){
+        
+        return view('admin.timeSlots');
+    }
+
 }

@@ -23,14 +23,17 @@ Route::controller(genaralController::class)->group(function () {
     Route::get('/set-new-password', 'setNewPass')->name('setNewPass');
     Route::post('set-new-pass', 'setNewPassword')->name('setNewPassword');
     Route::get('/sys-users', 'sysUsers')->name('sysUsers');
-    Route::get('show-password/{id}/{tempPass}', 'showPass')->name('showPass');
+    Route::get('/show-password/{id}/{tempPass}', 'showPass')->name('showPass');
+    Route::get('/get-user-update/{id}', 'getUpdateUser')->name('getUpdateUser');
+    Route::post('update-user{id}', 'updateUser')->name('updateUser');
+    Route::post('updateUserPassword/{id}', 'updateUserPassword')->name('updateUserPassword');
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'role:Admin', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::controller(dashboardController::class)->group(function () {
         Route::get('/dashboard', 'getAdminDashboard')->name('adminDashboard');
-        Route::get('/get-user-update/{id}', 'getUpdateUser')->name('getUpdateUser');
+        Route::get('/time-slots', 'getTimeSlots')->name('getTimeSlots');
     });
 
 });
