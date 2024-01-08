@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Admin\dashboardController;
-use App\Http\Controllers\genaralController;
-use App\Http\Controllers\Office\officeDashController;
-use App\Http\Controllers\studentController;
-use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\genaralController;
+use App\Http\Controllers\studentController;
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Admin\dashboardController;
+use App\Http\Controllers\Office\officeDashController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,14 @@ Route::controller(genaralController::class)->group(function () {
     Route::get('/setdashboard', 'setDashboard')->name('setDashboard');
 });
 
+Route::controller(AppointmentController::class)->group(function () {
+    Route::get('/appointments', 'index');
+    Route::post('/deleteAppointment/{id}', 'deleteAppointment')->name('deleteAppointment');
+    Route::post('create-appointment/{studentId}', 'createAppointment')->name('createAppointment');
+});
+
+
+
 Route::middleware(['auth:sanctum', 'role:Admin|Manager|Coordinator|Finance|consultant', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::controller(genaralController::class)->group(function () {
@@ -33,6 +42,7 @@ Route::middleware(['auth:sanctum', 'role:Admin|Manager|Coordinator|Finance|consu
         Route::get('/get-user-update/{id}', 'getUpdateUser')->name('getUpdateUser');
         Route::post('update-user{id}', 'updateUser')->name('updateUser');
         Route::post('updateUserPassword/{id}', 'updateUserPassword')->name('updateUserPassword');
+        Route::get('/user/{id}', 'user')->name('user');
     });
 
     Route::controller(studentController::class)->group(function () {
@@ -44,6 +54,7 @@ Route::middleware(['auth:sanctum', 'role:Admin|Manager|Coordinator|Finance|consu
         Route::get('/edit-student{id}', 'editStudent')->name('editStudent');
         Route::post('/delete-student{id}', 'deleteStudent')->name('deleteStudent');
         Route::post('/update-student/{id}', 'updateStudent')->name('updateStudent');
+        Route::post('/assign-consultant{studentId}', 'assignConsultant')->name('assignConsultant');
     });
 
 });

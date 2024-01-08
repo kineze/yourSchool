@@ -14,7 +14,6 @@ class TimeSlotsSeeder extends Seeder
     public function run()
     {
         // Clear existing records from the table
-        TimeSlot::truncate();
 
         // Generate and insert slots
         $startTime = strtotime('08:00:00'); // 8:00 PM

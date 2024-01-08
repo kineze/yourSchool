@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Student;
 use App\Models\TimeSlot;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Appointment;
 use Illuminate\Support\Facades\Auth;
 
 class dashboardController extends Controller
@@ -16,7 +18,13 @@ class dashboardController extends Controller
 
         $user = Auth::user();
 
-        return view('admin.Dashboard', compact('user'));
+        $students = Student::get();
+
+        $consultants = User::role('Consultant')->get();
+
+        $appointment = Appointment::get();
+
+        return view('admin.Dashboard', compact('user', 'students','consultants', 'appointment'));
     }
 
     public function getTimeSlots(){

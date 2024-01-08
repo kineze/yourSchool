@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use Exception;
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Country;
 use App\Models\Student;
+use App\Models\TimeSlot;
 use NotifyLk\Api\SmsApi;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
+use App\Mail\AppointmentAssigned;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class studentController extends Controller
 {
@@ -87,8 +93,8 @@ class studentController extends Controller
 
     private function sendSms(Student $student)
     {
-        $user_id = "26377";
-        $api_key = "e9voYrMm00E3MKJF2sXE";
+        $user_id = "26373";
+        $api_key = "SjAR7q9dPPuR8Ecb2uzm";
         $message = "Welcome to Skygate International, " . $student->name . ". We turn your dreams into reality. Together, let's build a successful future for you. Thank you for registering!";
         $to = $student->phone;
         $sender_id = "NotifyDEMO"; // Replace with your sender ID
@@ -133,7 +139,13 @@ class studentController extends Controller
         
         $student = Student::findOrFail($id);
 
-        return view('admin.student', compact('user', 'student'));
+        $consultants = User::role('Consultant')->get();
+
+        $timeSlots = TimeSlot::get();
+
+        $appointments = $student->appointment;
+
+        return view('admin.student', compact('user', 'student', 'consultants', 'timeSlots', 'appointments'));
     }
 
     public function searchStudents(Request $request)
@@ -170,7 +182,7 @@ class studentController extends Controller
             'alert-type' => 'error',
         ];
 
-        return redirect()->back()->with($notification);
+        return redirect()->route('students')->with($notification);
     }
 
     public function updateStudent(Request $request, $id)
@@ -220,5 +232,99 @@ class studentController extends Controller
 
         return redirect()->back()->with($notification,'success', 'Student updated successfully!');
     }
+
+    public function assignConsultant(Request $request, $studentId)
+    {
+        $request->validate([
+            'consultant' => 'nullable|exists:users,id',
+            'new-appoinment' => 'nullable|boolean',
+            'title' => 'nullable|string',
+            'date' => 'nullable|date',
+            'timeslot' => 'nullable|exists:time_slots,id',
+        ]);
+
+        // Get the student by ID or create a new one
+        $student = Student::findOrFail($studentId);
+
+        // Update the student's consultant ID
+        $student->update([
+            'consultant_id' => $request->input('consultant'),
+        ]);
+
+        // Check if a new appointment is requested
+        if ($request->input('new-appoinment')) {
+            // Create a new appointment using Eloquent
+            $appointment = new Appointment([
+                'title' => $request->input('title'),
+                'date' => $request->input('date'),
+                'timeslot_id' => $request->input('timeslot'),
+            ]);
+
+            // Associate the appointment with the student and consultant
+            $appointment->student()->associate($student);
+            $appointment->consultant()->associate($request->input('consultant'));
+            $appointment->save();
+
+            $this->sendAppointmentSms($student, $appointment);
+
+            Mail::to($student->consultant->email)->send(new AppointmentAssigned($student, $appointment));
+        }
+
+        
+
+        $notification = [
+            'message' => 'Consultant Assigned successfully',
+            'alert-type' => 'success',
+        ];
+        
+
+        return redirect()->back()->with($notification,'success', 'Form submitted successfully.');
+    }
+
+    private function sendAppointmentSms(Student $student, Appointment $appointment)
+    {
+        $user_id = "26373";
+        $api_key = "SjAR7q9dPPuR8Ecb2uzm";
+        $message = "Welcome to Skygate International, {$student->name}. Your appointment details: 
+        Title: {$appointment->title},
+        Date: {$appointment->date},
+        Start time: {$appointment->timeslot->start_time}. 
+        thank you!";
+        $to = $student->phone;
+        $sender_id = "NotifyDEMO"; // Replace with your sender ID
+
+        $api_url = "https://app.notify.lk/api/v1/send";
+
+        try {
+            $response = Http::get($api_url, [
+                'user_id' => $user_id,
+                'api_key' => $api_key,
+                'message' => $message,
+                'to' => $to,
+                'sender_id' => $sender_id,
+            ]);
+
+            // Log the response
+            $logMessage = "Notify.lk SMS Response for student {$student->id}: " . json_encode($response->json());
+            \Illuminate\Support\Facades\Log::info($logMessage);
+
+            // Check if the SMS was sent successfully
+            if ($response->successful()) {
+                // SMS sent successfully
+                // You may log this or perform additional actions
+            } else {
+                // SMS sending failed
+                // You may log this or handle errors
+                // $response->status(), $response->body(), etc.
+            }
+        } catch (\Exception $e) {
+            // Log any exceptions that might occur during the HTTP request
+            \Illuminate\Support\Facades\Log::error('Exception during Notify.lk SMS request: ' . $e->getMessage());
+        }
+    }
+
+
+
+
 
 }

@@ -209,5 +209,13 @@ class genaralController extends Controller
         return redirect()->back()->with($notification);
     }
 
+    public function user($id){
+
+        $user = Auth::user();
+
+        $selecteduser = User::findOrFail($id);
+
+        return view('admin.user', compact('user', 'selecteduser'));
+    }
     
 }

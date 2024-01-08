@@ -9,92 +9,58 @@ if (document.querySelector('[data-toggle="widget-calendar"]')) {
   var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   var mDay = weekday[today.getDay()];
 
-  var m = today.getMonth();
-  var d = today.getDate();
   document.getElementsByClassName("widget-calendar-year")[0].innerHTML = mYear;
   document.getElementsByClassName("widget-calendar-day")[0].innerHTML = mDay;
 
-  var calendar = new FullCalendar.Calendar(calendarEl, {
-    contentHeight: "auto",
-    initialView: "dayGridMonth",
-    selectable: true,
-    initialDate: "2020-12-01",
-    editable: true,
-    headerToolbar: false,
-    events: [
-      {
-        title: "Call with Dave",
-        start: "2020-11-18",
-        end: "2020-11-18",
-        className: "bg-gradient-to-tl from-red-600 to-rose-400",
-      },
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/appointments', true);
 
-      {
-        title: "Lunch meeting",
-        start: "2020-11-21",
-        end: "2020-11-22",
-        className: "bg-gradient-to-tl from-red-500 to-yellow-400",
-      },
+  xhr.onload = function () {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      var appointments = JSON.parse(xhr.responseText);
 
-      {
-        title: "All day conference",
-        start: "2020-11-29",
-        end: "2020-11-29",
-        className: "bg-gradient-to-tl from-green-600 to-lime-400",
-      },
+      var events = appointments.map(function (appointment) {
+        var formattedDate = moment(appointment.date).format('YYYY-MM-DD');
 
-      {
-        title: "Meeting with Mary",
-        start: "2020-12-01",
-        end: "2020-12-01",
-        className: "bg-gradient-to-tl from-blue-600 to-cyan-400",
-      },
+        // Construct the URL based on your route structure
+        var studentUrl = '/student/' + appointment.student_id + '#appointment-' + appointment.id;
 
-      {
-        title: "Winter Hackaton",
-        start: "2020-12-03",
-        end: "2020-12-03",
-        className: "bg-gradient-to-tl from-red-600 to-rose-400",
-      },
+        return {
+          title: appointment.title,
+          start: formattedDate,
+          end: formattedDate,
+          className: 'bg-gradient-to-tl from-orange-600 to-orange-400',
+          url: studentUrl, // Add the URL property
+        };
+      });
 
-      {
-        title: "Digital event",
-        start: "2020-12-07",
-        end: "2020-12-09",
-        className: "bg-gradient-to-tl from-red-500 to-yellow-400",
-      },
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        contentHeight: "auto",
+        initialView: "dayGridMonth",
+        selectable: true,
+        initialDate: moment().format('YYYY-MM-DD'), // Use today's date
+        editable: true,
+        headerToolbar: false,
+        events: events,
+        eventClick: function (info) {
+          // Navigate to the student link in the current tab
+          window.location.href = info.event.url;
+        },
+      });
 
-      {
-        title: "Marketing event",
-        start: "2020-12-10",
-        end: "2020-12-10",
-        className: "bg-gradient-to-tl from-purple-700 to-pink-500",
-      },
+      calendar.render();
+    } else {
+      console.error('Error fetching appointments:', xhr.statusText);
+    }
+  };
 
-      {
-        title: "Dinner with Family",
-        start: "2020-12-19",
-        end: "2020-12-19",
-        className: "bg-gradient-to-tl from-red-600 to-rose-400",
-      },
+  xhr.onerror = function () {
+    console.error('Network error while fetching appointments');
+  };
 
-      {
-        title: "Black Friday",
-        start: "2020-12-23",
-        end: "2020-12-23",
-        className: "bg-gradient-to-tl from-blue-600 to-cyan-400",
-      },
-
-      {
-        title: "Cyber Week",
-        start: "2020-12-02",
-        end: "2020-12-02",
-        className: "bg-gradient-to-tl from-red-500 to-yellow-400",
-      },
-    ],
-  });
-  calendar.render();
+  xhr.send();
 }
+
 
 
 //

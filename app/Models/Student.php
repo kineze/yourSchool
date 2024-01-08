@@ -17,6 +17,7 @@ class Student extends Model
         'birth_date',
         'age',
         'course_category',
+        'consultant_id',
         'highest_qualification',
         'image_path',
     ];
@@ -24,6 +25,21 @@ class Student extends Model
     public function countries()
     {
         return $this->belongsToMany(Country::class)->withTimestamps();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function consultant()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function appointment()
+    {
+        return $this->hasMany(appointment::class);
     }
     
 }

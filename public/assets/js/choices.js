@@ -15,6 +15,21 @@ if (document.getElementById("choices-language")) {
   const example = new Choices(language);
 }
 
+if (document.getElementById("choices-consultant")) {
+  var consultant = document.getElementById("choices-consultant");
+  const example = new Choices(consultant);
+}
+
+if (document.getElementById("choices-timeSlot")) {
+  var timeSlot = document.getElementById("choices-timeSlot");
+  const example = new Choices(timeSlot);
+}
+
+if (document.getElementById("choices-timeSlot2")) {
+  var timeSlot2 = document.getElementById("choices-timeSlot2");
+  const example = new Choices(timeSlot2);
+}
+
 if (document.getElementById("choices-skills")) {
   var skills = document.getElementById("choices-skills");
   const example = new Choices(skills, {

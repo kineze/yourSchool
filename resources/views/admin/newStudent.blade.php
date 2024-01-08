@@ -40,7 +40,6 @@
                                 <input type="text" name="phone" placeholder="XXXXXXXXXX" 
                                     class="{{ $errors->has('phone') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" 
                                     value="{{ old('phone') }}"
-                                    pattern="[1-9][0-9]{9}"
                                 />
                             </div>
                             @error('phone')

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Office;
 
 use App\Models\User;
+use App\Models\Student;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
 
 class officeDashController extends Controller
@@ -16,7 +17,11 @@ class officeDashController extends Controller
 
         $students = Student::get();
 
-        return view('office.dashboard', compact('user','students'));
+        $consultants = User::role('Consultant')->get();
+
+        $appointment = Appointment::get();
+
+        return view('office.dashboard', compact('user','students','consultants','appointment'));
     }
 
     public function officeUsers(){

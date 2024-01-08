@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->date('birth_date');
             $table->unsignedInteger('age');
+            $table->unsignedBigInteger('consultant_id')->nullable();
+            $table->foreign('consultant_id')->references('id')->on('users')->onDelete('set null');
             $table->string('image_path')->nullable();
             $table->timestamps();
         });
