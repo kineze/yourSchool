@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
         "spatie/laravel-permission": "^6.3",
-        "webpatser/laravel-countries": "^1.5"
+        "webpatser/laravel-countries": "^1.5",
+        "notifylk/notify-php": "*@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -24,6 +25,12 @@
         "phpunit/phpunit": "^10.1",
         "spatie/laravel-ignition": "^2.0"
     },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/notifylk/notify-php.git"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/",

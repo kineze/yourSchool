@@ -36,7 +36,13 @@
                         </div>
                         <div class="w-full max-w-full px-3 flex-0 sm:w-6/12">
                             <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="phone">Phone</label>
-                            <input type="text" name="phone" placeholder="XXXXXXXXXX" class="{{ $errors->has('phone') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" value="{{ old('phone') }}"/>
+                            <div class="flex items-center">
+                                <input type="text" name="phone" placeholder="XXXXXXXXXX" 
+                                    class="{{ $errors->has('phone') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" 
+                                    value="{{ old('phone') }}"
+                                    pattern="[1-9][0-9]{9}"
+                                />
+                            </div>
                             @error('phone')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -139,5 +145,43 @@
         }
     }
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the phone input element
+        var phoneInput = document.querySelector('input[name="phone"]');
+
+        // Add an event listener for the input event
+        phoneInput.addEventListener('input', function() {
+            // Get the value of the input
+            var inputValue = phoneInput.value.trim();
+
+            // Check if the input starts with '94'
+            if (!inputValue.startsWith('94')) {
+                // If not, add '94' to the beginning
+                phoneInput.value = '94' + inputValue;
+            }
+
+            // Check if '0' is used after '94'
+            if (inputValue.startsWith('940')) {
+                // Remove the '0' after '94'
+                phoneInput.value = '94' + inputValue.slice(3);
+            }
+        });
+
+        // Add an event listener for form submission (optional)
+        // You can add additional validation logic here if needed
+        document.querySelector('form').addEventListener('submit', function(event) {
+            var inputValue = phoneInput.value.trim();
+
+            // Validate if '94' is present and '0' is not used after '94'
+            if (!inputValue.startsWith('94') || inputValue.startsWith('940')) {
+                alert('Invalid phone number format');
+                event.preventDefault(); // Prevent form submission
+            }
+        });
+    });
+</script>
+
     
 @endpush
