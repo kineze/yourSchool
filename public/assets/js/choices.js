@@ -26,6 +26,16 @@ if (document.getElementById("choices-skills")) {
   });
 }
 
+if (document.getElementById("choices-disease")) {
+  var disease = document.getElementById("choices-disease");
+  const example = new Choices(disease, {
+    removeItemButton: true, // Enable remove button for selected items
+    maxItemCount: -1,       // Allow unlimited selections
+    searchResultLimit: 5,   // Show up to 5 search results
+    renderChoiceLimit: 5    // Show up to 5 selected items
+  });
+}
+
 if (document.getElementById("choices-year")) {
   var year = document.getElementById("choices-year");
   setTimeout(function () {

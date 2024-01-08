@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\dashboardController;
 use App\Http\Controllers\genaralController;
 use App\Http\Controllers\Office\officeDashController;
+use App\Http\Controllers\studentController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,13 +21,31 @@ use Illuminate\Support\Facades\Route;
 Route::controller(genaralController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/setdashboard', 'setDashboard')->name('setDashboard');
-    Route::get('/set-new-password', 'setNewPass')->name('setNewPass');
-    Route::post('set-new-pass', 'setNewPassword')->name('setNewPassword');
-    Route::get('/sys-users', 'sysUsers')->name('sysUsers');
-    Route::get('/show-password/{id}/{tempPass}', 'showPass')->name('showPass');
-    Route::get('/get-user-update/{id}', 'getUpdateUser')->name('getUpdateUser');
-    Route::post('update-user{id}', 'updateUser')->name('updateUser');
-    Route::post('updateUserPassword/{id}', 'updateUserPassword')->name('updateUserPassword');
+});
+
+Route::middleware(['auth:sanctum', 'role:Admin|Manager|Coordinator|Finance|consultant', config('jetstream.auth_session'), 'verified',])->group(function () {
+
+    Route::controller(genaralController::class)->group(function () {
+        Route::get('/set-new-password', 'setNewPass')->name('setNewPass');
+        Route::post('set-new-pass', 'setNewPassword')->name('setNewPassword');
+        Route::get('/sys-users', 'sysUsers')->name('sysUsers');
+        Route::get('/show-password/{id}/{tempPass}', 'showPass')->name('showPass');
+        Route::get('/get-user-update/{id}', 'getUpdateUser')->name('getUpdateUser');
+        Route::post('update-user{id}', 'updateUser')->name('updateUser');
+        Route::post('updateUserPassword/{id}', 'updateUserPassword')->name('updateUserPassword');
+    });
+
+    Route::controller(studentController::class)->group(function () {
+        Route::get('/new-student', 'newStudent')->name('newStudent');
+        Route::post('/store-student', 'storeStudent')->name('storeStudent');
+        Route::get('/students', 'students')->name('students');
+        Route::get('/student/{id}', 'student')->name('student');
+        Route::post('/search/students', 'searchStudents')->name('search.students');
+        Route::get('/edit-student{id}', 'editStudent')->name('editStudent');
+        Route::post('/delete-student{id}', 'deleteStudent')->name('deleteStudent');
+        Route::post('/update-student/{id}', 'updateStudent')->name('updateStudent');
+    });
+
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'role:Admin', config('jetstream.auth_session'), 'verified',])->group(function () {

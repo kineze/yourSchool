@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Events\SendPasswordViaEmail;
+use App\Models\Country;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -80,8 +81,6 @@ class genaralController extends Controller
         if (isset($userEmailSet) && $userEmailSet) {
             event(new SendPasswordViaEmail($user, $tempPass));
         }
-        
-        Auth::login($user);
 
         $notification = [
             'message' => 'password changed succesfully. please re login with new password',

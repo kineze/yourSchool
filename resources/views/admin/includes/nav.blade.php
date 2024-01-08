@@ -18,9 +18,13 @@
         </li>
       </ol>
       <h6 class="text-sm pl-2 capitalize leading-normal text-slate-700 before:float-left  before:text-gray-600 dark:text-white dark:before:text-white">{{ $user->name }}</h6>
+
+
+
+      
     </nav>
 
-    <div class="flex items-center">
+    <div class="flex pr-4 items-center">
       <a mini-sidenav-burger href="javascript:;" class="hidden p-0 transition-all ease-nav-brand text-sm text-slate-500 xl:block" aria-expanded="false">
         <div class="w-4.5 overflow-hidden">
           <i class="ease-soft mb-0.75 relative block h-0.5 translate-x-[5px] rounded-sm bg-slate-500 transition-all dark:bg-white"></i>
@@ -28,6 +32,14 @@
           <i class="ease-soft relative block h-0.5 translate-x-[5px] rounded-sm bg-slate-500 transition-all dark:bg-white"></i>
         </div>
       </a>
+    </div>
+
+    <div class="relative max-w-120   flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
+      <span class="text-sm ease-soft leading-5.6 absolute z-50 flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
+        <i class="fas fa-search" aria-hidden="true"></i>
+      </span>
+      <input type="text" name="studentSearch" class="pl-9 text-sm focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow" placeholder="Type here...">
+      <div id="search-results" class="absolute z-50 top-12 left-0 w-full"></div>
     </div>
 
     
