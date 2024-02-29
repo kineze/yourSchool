@@ -76,7 +76,7 @@
                                         <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-lime-200 text-lime-600 align-baseline font-bold uppercase leading-none">{{ $role->name }}</span>
                                     @elseif($role->name === 'Coordinator')
                                         <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-orange-200 text-orange-600 align-baseline font-bold uppercase leading-none">{{ $role->name }}</span>
-                                    @elseif($role->name === 'Consultant')
+                                    @elseif($role->name === 'Teacher')
                                         <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-teal-200 text-teal-600 align-baseline font-bold uppercase leading-none">{{ $role->name }}</span>
                                     @elseif($role->name === 'Finance')
                                         <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-violet-200 text-violet-600 align-baseline font-bold uppercase leading-none">{{ $role->name }}</span>

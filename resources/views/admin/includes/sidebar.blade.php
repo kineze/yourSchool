@@ -6,9 +6,9 @@
       <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-slate-400 dark:text-white xl:hidden" aria-hidden="true" sidenav-close-btn></i>
   
       <a class="flex justify-center items-center px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700 dark:text-white" href="{{url('/setdashboard')}}">
-        <img src="{{asset('assets/img/skygate-logo.png')}}" class="inline-block h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-10 dark:hidden" alt="main_logo" />
-        <img src="{{asset('assets/img/skygate-logo.png')}}" class="hidden h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-10 dark:inline-block" alt="main_logo" />
-        <span class="ml-1 text-3xl text-transparent bg-clip-text bg-gradient-to-tl from-orange-600 to-orange-400 font-bold  transition-all duration-200 ease-soft-in-out"> SKYGATE</span>
+        <img src="{{asset('assets/img/logo-2.png')}}" class="inline-block h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-12 dark:hidden" alt="main_logo" />
+        <img src="{{asset('assets/img/logo-2.png')}}" class="hidden h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-12 dark:inline-block" alt="main_logo" />
+        {{-- <span class="ml-1 text-3xl text-transparent bg-clip-text bg-gradient-to-tl from-orange-600 to-orange-400 font-bold  transition-all duration-200 ease-soft-in-out"></span> --}}
       </a>
     </div>
   
@@ -47,7 +47,7 @@
   
         <li class="mt-0.5 w-full">
           <a active_primary collapse_trigger="primary" href="javascript:;" class="after:ease-soft-in-out after:font-awesome-5-free ease-soft-in-out text-sm py-2.7 active xl:shadow-soft-xl my-0 mx-4 flex items-center whitespace-nowrap rounded-lg bg-white px-4 font-semibold text-slate-700 transition-all after:ml-auto after:inline-block after:rotate-180 after:font-bold after:text-slate-800 after:antialiased after:transition-all after:duration-200 after:content-['\f107'] dark:text-white dark:opacity-80" aria-controls="applicationsExamples" role="button" aria-expanded="true">
-            <div class="stroke-none shadow-soft-sm bg-gradient-to-tl from-orange-600 to-orange-200 mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current p-2.5 text-center text-black">
+            <div class="stroke-none shadow-soft-sm bg-gradient-to-tl from-blue-600 to-purple-400 mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current p-2.5 text-center text-black">
               <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
@@ -81,7 +81,7 @@
 
         <li class="mt-0.5 w-full">
           <a active_primary collapse_trigger="primary" href="javascript:;" class="after:ease-soft-in-out after:font-awesome-5-free ease-soft-in-out text-sm py-2.7 active xl:shadow-soft-xl my-0 mx-4 flex items-center whitespace-nowrap rounded-lg bg-white px-4 font-semibold text-slate-700 transition-all after:ml-auto after:inline-block after:rotate-180 after:font-bold after:text-slate-800 after:antialiased after:transition-all after:duration-200 after:content-['\f107'] dark:text-white dark:opacity-80" aria-controls="applicationsExamples" role="button" aria-expanded="true">
-            <div class="stroke-none shadow-soft-sm bg-gradient-to-tl from-orange-600 to-orange-200 mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current p-2.5 text-center text-black">
+            <div class="stroke-none shadow-soft-sm bg-gradient-to-tl from-blue-600 to-purple-400 mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current p-2.5 text-center text-black">
                 <svg fill="#ffffff" style="color: white;" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" id="dashboard-alt" class="icon glyph" stroke="#ffffff">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
@@ -112,7 +112,7 @@
 
         <li class="mt-0.5 w-full">
             <a active_primary collapse_trigger="primary" href="javascript:;" class="after:ease-soft-in-out after:font-awesome-5-free ease-soft-in-out text-sm py-2.7 active xl:shadow-soft-xl my-0 mx-4 flex items-center whitespace-nowrap rounded-lg bg-white px-4 font-semibold text-slate-700 transition-all after:ml-auto after:inline-block after:rotate-180 after:font-bold after:text-slate-800 after:antialiased after:transition-all after:duration-200 after:content-['\f107'] dark:text-white dark:opacity-80" aria-controls="applicationsExamples" role="button" aria-expanded="true">
-              <div class="stroke-none shadow-soft-sm bg-gradient-to-tl from-orange-600 to-orange-200 mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current p-2.5 text-center text-black">
+              <div class="stroke-none shadow-soft-sm bg-gradient-to-tl from-blue-600 to-purple-400 mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current p-2.5 text-center text-black">
                 <svg width="800px"fill="#ffffff" style="color: white;" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M15.5 7.5C15.5 9.433 13.933 11 12 11C10.067 11 8.5 9.433 8.5 7.5C8.5 5.567 10.067 4 12 4C13.933 4 15.5 5.567 15.5 7.5Z" fill="#ffffff"/>
                     <path d="M18 16.5C18 18.433 15.3137 20 12 20C8.68629 20 6 18.433 6 16.5C6 14.567 8.68629 13 12 13C15.3137 13 18 14.567 18 16.5Z" fill="#ffffff"/>

@@ -20,11 +20,11 @@ class dashboardController extends Controller
 
         $students = Student::get();
 
-        $consultants = User::role('Consultant')->get();
+        $teachers = User::role('Teacher')->get();
 
         $appointment = Appointment::get();
 
-        return view('admin.Dashboard', compact('user', 'students','consultants', 'appointment'));
+        return view('admin.Dashboard', compact('user', 'students','teachers', 'appointment'));
     }
 
     public function getTimeSlots(){

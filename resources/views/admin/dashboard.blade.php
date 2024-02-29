@@ -34,9 +34,9 @@
                     <div class="flex flex-wrap -mx-3">
                       <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
-                          <p class="mb-0 font-sans font-semibold leading-normal text-sm">Consultants</p>
+                          <p class="mb-0 font-sans font-semibold leading-normal text-sm">Teachers</p>
                           <h5 class="mb-0 font-bold dark:text-white">
-                            {{ count($consultants)}}
+                            {{ count($teachers)}}
                           </h5>
                         </div>
                       </div>
@@ -55,7 +55,7 @@
                     <div class="flex flex-wrap -mx-3">
                       <div class="flex-none w-2/3 max-w-full px-3">
                         <div>
-                          <p class="mb-0 font-sans font-semibold leading-normal text-sm">Sessions</p>
+                          <p class="mb-0 font-sans font-semibold leading-normal text-sm">Classes</p>
                           <h5 class="mb-0 font-bold dark:text-white">
                             {{count($appointment)}}
                           </h5>
@@ -97,21 +97,21 @@
         <div class="w-full max-w-full px-3 sm:flex-0 shrink-0 sm:w-6/12 lg:w-full">
           <div class="border-black/12.5 shadow-soft-xl dark:bg-gray-950 dark:shadow-soft-dark-xl relative flex min-w-0 flex-col break-words rounded-2xl border-0 border-solid bg-white bg-clip-border">
             <div class="p-4 pb-0 rounded-t-4">
-              <h6 class="mb-0 dark:text-white">Consultants</h6>
+              <h6 class="mb-0 dark:text-white">Teachers</h6>
             </div>
             <div class="flex-auto p-4">
               <ul class="flex flex-col pl-0 mb-0 rounded-lg">
-              @if (count($consultants) != 0)
-                @foreach ($consultants as $consultant)
+              @if (count($teachers) != 0)
+                @foreach ($teachers as $teacher)
                   <li class="relative flex justify-between py-2 pr-4 mb-2 border-0 rounded-t-lg rounded-xl text-inherit">
                     <div class="flex items-center">
                       <div class="flex flex-col">
-                        <h6 class="mb-1 leading-normal text-sm text-slate-700 dark:text-white">{{$consultant->name}}</h6>
-                        <span class="leading-tight text-xs">{{$consultant->email}} <span class="font-semibold"></span></span>
+                        <h6 class="mb-1 leading-normal text-sm text-slate-700 dark:text-white">{{$teacher->name}}</h6>
+                        <span class="leading-tight text-xs">{{$teacher->email}} <span class="font-semibold"></span></span>
                       </div>
                     </div>
                     <div class="flex">
-                      <a href="{{route('user', $consultant->id)}}" class="group ease-soft-in leading-pro text-xs rounded-3.5xl p-1.2 h-6 w-6 mx-0 my-auto inline-block cursor-pointer border-0 bg-transparent text-center align-middle font-bold text-slate-700 shadow-none transition-all dark:text-white"><i class="ni leading-none ease-bounce text-3xs group-hover:translate-x-1.25 ni-bold-right transition-all duration-200" aria-hidden="true"></i></a>
+                      <a href="{{route('user', $teacher->id)}}" class="group ease-soft-in leading-pro text-xs rounded-3.5xl p-1.2 h-6 w-6 mx-0 my-auto inline-block cursor-pointer border-0 bg-transparent text-center align-middle font-bold text-slate-700 shadow-none transition-all dark:text-white"><i class="ni leading-none ease-bounce text-3xs group-hover:translate-x-1.25 ni-bold-right transition-all duration-200" aria-hidden="true"></i></a>
                     </div>
                   </li>
                 @endforeach
@@ -119,7 +119,7 @@
               <li class="relative flex justify-between py-2 pr-4 mb-2 border-0 rounded-t-lg rounded-xl text-inherit">
                 <div class="flex items-center">
                   <div class="flex justify-center w-full flex-col">
-                    <h6 class="mb-1 leading-normal text-sm text-red-700 dark:text-white">No Consultants in the system</h6>
+                    <h6 class="mb-1 leading-normal text-sm text-red-700 dark:text-white">No teacher in the system</h6>
                   </div>
                 </div>
               </li>

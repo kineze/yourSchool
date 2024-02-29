@@ -6,18 +6,18 @@
 
     <main class="mt-0 transition-all duration-200 ease-soft-in-out">
       <section>
-        <div class="relative flex items-center min-h-screen p-0 overflow-hidden bg-center bg-cover">
+        <div class="relative flex items-center justify-center min-h-screen p-0 overflow-hidden bg-center bg-cover">
           <div class="container z-1">
-            <div class="flex flex-wrap ml-8 -mx-3">
+            <div class="flex flex-wrap xl:ml-8 -mx-3">
 
-              <div class="flex flex-col w-full max-w-full px-3 mx-auto lg:mx-0 shrink-0 md:flex-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
+              <div class="flex  flex-col w-full max-w-full px-3 mx-auto lg:mx-0 shrink-0 md:flex-0 md:w-7/12 lg:w-5/12 xl:w-4/12">
 
                 <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none lg:py4 dark:bg-gray-950 rounded-2xl bg-clip-border">
-                  <div class="p-6 -ml-4 pb-0 flex flex-wrap items-center space-x-3 mb-0">
-                    <img class="" src="{{asset('assets/img/skygate-logo.png')}}" alt="logo">
+                  <div class="p-6 justify-center  -ml-4 pb-0 flex flex-wrap items-center space-x-3 mb-0">
+                    <img class=" max-w-80" src="{{asset('assets/img/logo-2.png')}}" alt="logo">
                     <div>
-                        <h4 class="font-bold text-2xl uppercase mb-0">Skygate International</h4>
-                        <p class="font-semibold mb-0">Welcome! user, Log In now.</p>
+                        {{-- <h4 class="font-bold text-2xl uppercase mb-0">Your School</h4> --}}
+                        {{-- <p class="font-semibold mb-0">Welcome! user, Log In now.</p> --}}
                     </div>
                   </div>
 
@@ -44,27 +44,27 @@
                           <label class="mb-2 ml-1 font-normal cursor-pointer select-none text-sm text-slate-700" for="remember">Remember me</label>
                         </div> --}}
                         <div class="text-center">
-                          <button type="submit" class="inline-block w-full px-6 py-3 mt-6 mb-2 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-gradient-to-tl from-orange-600 to-orange-400 hover:border-slate-700 hover:bg-slate-700 hover:text-white">Sign in</button>
+                          <button type="submit" class="inline-block w-full px-6 py-3 mt-6 mb-2 font-bold text-center text-white uppercase align-middle transition-all bg-transparent border-0 rounded-lg cursor-pointer active:opacity-85 hover:scale-102 hover:shadow-soft-xs leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25 bg-gradient-to-tl from-blue-600 to-purple-400 hover:border-slate-700 hover:bg-slate-700 hover:text-white">Sign in</button>
                         </div>
                         
                       </form>
                   </div>
 
-                  <div class="p-6 pb-0 mb-0">
+                  {{-- <div class="p-6 flex justify-center pb-0 mb-0">
 
                     <h3 class="">
-                        <span class="font-bold text-6">Every Success Story</span>
+                        <span class="font-bold text-6">Your Path  </span>
                     </h3>
                     <h3>
-                        <span class="font-bold text-5xl"> starts with a <strong class=" text-24" style="color:#FF8E00"> Dream! </strong></span>
+                        <span class="font-bold text-5xl"> To <strong class=" text-14 text-purple-600"> Limitless Learning! </strong></span>
                     </h3>
                 
-                  </div>
+                  </div> --}}
               
                 </div>
               </div>
               <div class="absolute top-0 right-0 flex-col justify-center hidden w-6/12 h-full max-w-full px-3 pr-0 my-auto text-center flex-0 lg:flex">
-                <div class="relative flex flex-col justify-center h-full px-24 m-4 bg-cover rounded-xl" style="background-image: url({{asset('assets/img/skygate-login.jpeg')}})">
+                <div class="relative flex flex-col justify-center h-full px-48 m-4 bg-contain bg-center bg-no-repeat rounded-xl" style="background-image: url({{asset('assets/img/3d-cover.webp')}})">
                   <img class="absolute left-0 opacity-40" src="https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/img/shapes/pattern-lines.svg" alt="pattern-lines">
                 
                 </div>

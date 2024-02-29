@@ -41,5 +41,15 @@ class Student extends Model
     {
         return $this->hasMany(appointment::class);
     }
+
+    public function studentDetail()
+    {
+        return $this->hasOne(StudentDetail::class);
+    }
+
+    public function guardianDetail()
+    {
+        return $this->hasOne(GuardianDetail::class);
+    }
     
 }

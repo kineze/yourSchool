@@ -51,10 +51,11 @@ Route::middleware(['auth:sanctum', 'role:Admin|Manager|Coordinator|Finance|consu
         Route::get('/students', 'students')->name('students');
         Route::get('/student/{id}', 'student')->name('student');
         Route::post('/search/students', 'searchStudents')->name('search.students');
-        Route::get('/edit-student{id}', 'editStudent')->name('editStudent');
-        Route::post('/delete-student{id}', 'deleteStudent')->name('deleteStudent');
+        Route::get('/edit-student/{id}', 'editStudent')->name('editStudent');
+        Route::post('/delete-student/{id}', 'deleteStudent')->name('deleteStudent');
         Route::post('/update-student/{id}', 'updateStudent')->name('updateStudent');
         Route::post('/assign-consultant{studentId}', 'assignConsultant')->name('assignConsultant');
+        Route::post('/get-students-by-date-range','getStudentsByDateRange')->name('getStudentsByDateRange');
     });
 
 });

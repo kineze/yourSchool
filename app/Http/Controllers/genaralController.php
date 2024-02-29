@@ -97,7 +97,7 @@ class genaralController extends Controller
 
         // If the authenticated user is a Manager, get specific roles
         if ($authUser->hasRole('Manager')) {
-            $allowedRoles = ['Coordinator', 'Finance', 'Manager', 'Consultant'];
+            $allowedRoles = ['Coordinator', 'Finance', 'Manager', 'Teacher'];
             $users = User::role($allowedRoles)->get();
         }
         // If the authenticated user is an Admin, get all users

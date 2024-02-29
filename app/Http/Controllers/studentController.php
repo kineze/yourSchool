@@ -12,12 +12,14 @@ use NotifyLk\Api\SmsApi;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Mail\AppointmentAssigned;
+use App\Models\GuardianDetail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Laravel\Prompts\Note;
 
 class studentController extends Controller
 {
@@ -51,6 +53,21 @@ class studentController extends Controller
             'countries' => 'nullable|array',
             'countries.*' => 'exists:countries,id',
             'stu-img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
+            'st-nic' => 'nullable|string|max:255',
+            'gender' => 'nullable|in:Male,Female,Other',
+            'blood-group' => 'nullable|in:A+,A-,B+,B-,AB+,AB-,O+,O-',
+            'prev-school' => 'nullable|string|max:255',
+            'orphan' => 'nullable|boolean',
+            'religion' => 'nullable|in:Christianity,Islam,Hinduism,Buddhism',
+
+            // Validation rules for guardian information (only if checkbox is checked)
+            'role' => 'nullable|in:Father,Mother,Other',
+            'gName' => 'nullable|string|max:255',
+            'gNic' => 'nullable|string|max:255',
+            'profession' => 'nullable|string|max:255',
+            'gPhone' => 'nullable|string|max:20',
+            'income' => 'nullable|string|max:255',
         ]);
 
         // Calculate age based on the birth date
@@ -72,13 +89,50 @@ class studentController extends Controller
 
         // Save student image if provided
         if ($request->hasFile('stu-img')) {
-            $imagePath = $request->file('stu-img')->store('student_images', 'public');
+            // Store the uploaded image in the storage and update the pet's image path
+            $imagePath = $request->file('stu-img')->store('pet_images', 'public');
             $student->image_path = $imagePath;
+            $student->save();
+        }
+
+        if ($request->hasFile('webcam_capture_file')) {
+            $webcamImagePath = $request->file('webcam_capture_file')->store('pet_images', 'public');
+            $student->image_path = $webcamImagePath;
+            $student->save();
+        }elseif($request->hasFile('stu-img')) {
+            $imagePath = $request->file('stu-img')->store('pet_images', 'public');
+            $student->image_path = $imagePath;
+            $student->save();
         }
 
         // Attach selected countries to the student
         if ($request->has('countries')) {
             $student->countries()->attach($request->input('countries'));
+        }
+
+        if ($request->has('advanced-c')) {
+            // Validate and store advanced information
+            $student->studentDetail()->create([
+                'student_nic' => $request->input('st-nic'),
+                'gender' => $request->input('gender'),
+                'blood_group' => $request->input('blood-group'),
+                'previous_school' => $request->input('prev-school'),
+                'orphan' => $request->input('orphan', 0), // default to 0 if not provided
+                'religion' => $request->input('religion'),
+            ]);
+        }
+    
+        // Check if the guardian information checkbox is checked
+        if ($request->has('gaurdian-c')) {
+            // Validate and store guardian information
+            $student->guardianDetail()->create([
+                'guardian_role' => $request->input('role'),
+                'guardian_name' => $request->input('gName'),
+                'guardian_nic' => $request->input('gNic'),
+                'profession' => $request->input('profession'),
+                'phone_number' => $request->input('gPhone'),
+                'income' => $request->input('income'),
+            ]);
         }
 
         $this->sendSms($student);
@@ -95,7 +149,7 @@ class studentController extends Controller
     {
         $user_id = "26373";
         $api_key = "SjAR7q9dPPuR8Ecb2uzm";
-        $message = "Welcome to Skygate International, " . $student->name . ". We turn your dreams into reality. Together, let's build a successful future for you. Thank you for registering!";
+        $message = "Welcome to Your School, " . $student->name . ". We turn your dreams into reality. Together, let's build a successful future for you. Thank you for registering!";
         $to = $student->phone;
         $sender_id = "NotifyDEMO"; // Replace with your sender ID
 
@@ -129,23 +183,23 @@ class studentController extends Controller
         }
     }
 
-
-
-
-
     public function student($id){
 
         $user = Auth::user();
         
         $student = Student::findOrFail($id);
 
-        $consultants = User::role('Consultant')->get();
+        $consultants = User::role('Teacher')->get();
 
         $timeSlots = TimeSlot::get();
 
+        $guardian_details = $student->guardianDetail;
+
+        $student_details = $student->studentDetail;
+ 
         $appointments = $student->appointment;
 
-        return view('admin.student', compact('user', 'student', 'consultants', 'timeSlots', 'appointments'));
+        return view('admin.student', compact('user', 'student', 'guardian_details','student_details', 'consultants', 'timeSlots', 'appointments'));
     }
 
     public function searchStudents(Request $request)
@@ -165,9 +219,13 @@ class studentController extends Controller
 
         $student = Student::findOrFail($id);
 
+        $studentDetails =  $student->studentDetail;
+
+        $guardianDetails = $student->guardianDetail;
+
         $countries = Country::get();
 
-        return view('admin.editStudent', compact('user', 'student', 'countries'));
+        return view('admin.editStudent', compact('user','studentDetails','guardianDetails', 'student', 'countries'));
 
     }
 
@@ -196,19 +254,41 @@ class studentController extends Controller
             'countries' => 'nullable|array',
             'countries.*' => 'exists:countries,id',
             'stu-img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+
+            'st-nic' => 'nullable|string|max:255',
+            'gender' => 'nullable|in:Male,Female,Other',
+            'blood-group' => 'nullable|in:A+,A-,B+,B-,AB+,AB-,O+,O-',
+            'prev-school' => 'nullable|string|max:255',
+            'orphan' => 'nullable|boolean',
+            'religion' => 'nullable|in:Christianity,Islam,Hinduism,Buddhism',
+
+            // Validation rules for guardian information (only if checkbox is checked)
+            'role' => 'nullable|in:Father,Mother,Other',
+            'gName' => 'nullable|string|max:255',
+            'gNic' => 'nullable|string|max:255',
+            'profession' => 'nullable|string|max:255',
+            'gPhone' => 'nullable|string|max:20',
+            'income' => 'nullable|string|max:255',
         ]);
+       
 
         $student = Student::findOrFail($id);
 
-        // Check if a new image is uploaded
-        if ($request->hasFile('stu-img')) {
+        if ($request->hasFile('webcam_capture_file')) {
             if ($student->image_path) {
                 Storage::delete($student->image_path);
             }
 
-            // Store the new image
-            $path = $request->file('stu-img')->store('student_images', 'public');
-            $student->image_path = $path;
+            $webcamImagePath = $request->file('webcam_capture_file')->store('student_images', 'public');
+            $student->image_path = $webcamImagePath;
+        }elseif ($request->hasFile('stu-img')) {
+            
+            if ($student->image_path) {
+                Storage::delete($student->image_path);
+            }
+
+            $imagePath = $request->file('stu-img')->store('student_images', 'public');
+            $student->image_path = $imagePath;
         }
 
         // Update other fields
@@ -217,10 +297,28 @@ class studentController extends Controller
         $student->phone = $request->input('phone');
         $student->address = $request->input('address');
         $student->birth_date = $request->input('birth_date');
-        // Update other fields as needed
 
-        // Save the changes
+
         $student->save();
+
+        
+        $student->studentDetail->update([
+            'student_nic' => $request->input('st-nic'),
+            'gender' => $request->input('gender'),
+            'blood_group' => $request->input('blood-group'),
+            'previous_school' => $request->input('prev-school'),
+            'orphan' => $request->input('orphan', 0),
+            'religion' => $request->input('religion'),
+        ]);
+        
+        $student->guardianDetail->update([
+            'guardian_role' => $request->input('role'),
+            'guardian_name' => $request->input('gName'),
+            'guardian_nic' => $request->input('gNic'),
+            'profession' => $request->input('profession'),
+            'phone_number' => $request->input('gPhone'),
+            'income' => $request->input('income'),
+        ]);
 
         // Update the desired countries relationship
         $student->countries()->sync($request->input('countries', []));
@@ -321,6 +419,25 @@ class studentController extends Controller
             // Log any exceptions that might occur during the HTTP request
             \Illuminate\Support\Facades\Log::error('Exception during Notify.lk SMS request: ' . $e->getMessage());
         }
+    }
+
+    public function getStudentsByDateRange(Request $request)
+    {
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $studentType = $request->input('student_type'); // Added line to get student type
+
+        $query = Student::whereBetween('created_at', [$startDate, $endDate]);
+
+        // Check if a specific student type is selected
+        if ($studentType) {
+            $query->where('student_type', $studentType);
+        }
+
+        // Paginate the results (adjust the number as needed)
+        $students = $query->paginate(10);
+
+        return response()->json($students);
     }
 
 

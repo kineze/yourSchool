@@ -10,6 +10,16 @@ if (document.getElementById("choices-gender")) {
   const example = new Choices(gender);
 }
 
+if (document.getElementById("choices-inquriy")) {
+  var inquiry = document.getElementById("choices-inquriy");
+  const example = new Choices(inquiry);
+}
+
+if (document.getElementById("choices-blood-group")) {
+  var bloodGroup = document.getElementById("choices-blood-group");
+  const example = new Choices(bloodGroup );
+}
+
 if (document.getElementById("choices-language")) {
   var language = document.getElementById("choices-language");
   const example = new Choices(language);
@@ -18,6 +28,21 @@ if (document.getElementById("choices-language")) {
 if (document.getElementById("choices-consultant")) {
   var consultant = document.getElementById("choices-consultant");
   const example = new Choices(consultant);
+}
+
+if (document.getElementById("choices-role")) {
+  var role = document.getElementById("choices-role");
+  const example = new Choices(role);
+}
+
+if (document.getElementById("choices-religion")) {
+  var religion = document.getElementById("choices-religion");
+  const example = new Choices(religion);
+}
+
+if (document.getElementById("choices-orphan")) {
+  var orphan = document.getElementById("choices-orphan");
+  const example = new Choices(orphan);
 }
 
 if (document.getElementById("choices-timeSlot")) {
