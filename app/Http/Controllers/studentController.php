@@ -149,7 +149,7 @@ class studentController extends Controller
     {
         $user_id = "26373";
         $api_key = "SjAR7q9dPPuR8Ecb2uzm";
-        $message = "Welcome to Your School, " . $student->name . ". We turn your dreams into reality. Together, let's build a successful future for you. Thank you for registering!";
+        $message = "Welcome to Nanamal Royal College, " . $student->name . ". We turn your dreams into reality. Together, let's build a successful future for you. Thank you for registering!";
         $to = $student->phone;
         $sender_id = "NotifyDEMO"; // Replace with your sender ID
 
@@ -301,24 +301,51 @@ class studentController extends Controller
 
         $student->save();
 
+        if ($request->has('advanced-c')) {
+            $studentDetailData = [
+                'student_nic' => $request->input('st-nic'),
+                'gender' => $request->input('gender'),
+                'blood_group' => $request->input('blood-group'),
+                'previous_school' => $request->input('prev-school'),
+                'orphan' => $request->input('orphan', 0),
+                'religion' => $request->input('religion'),
+            ];
+
+            if (collect($studentDetailData)->filter()->isNotEmpty()) {
+                if ($student->studentDetail) {
+                    // Student detail exists, update it
+                    $student->studentDetail->update($studentDetailData);
+                } else {
+                    // Student detail doesn't exist, create a new one
+                    $student->studentDetail()->create($studentDetailData);
+                }
+            }    
+
+        }
+
+        if($request->has('gaurdian-c')){
+
+            $guardianDetailData = [
+                'guardian_role' => $request->input('role'),
+                'guardian_name' => $request->input('gName'),
+                'guardian_nic' => $request->input('gNic'),
+                'profession' => $request->input('profession'),
+                'phone_number' => $request->input('gPhone'),
+                'income' => $request->input('income'),
+            ];
+
+            if (collect($guardianDetailData)->filter()->isNotEmpty()) {
+                if ($student->guardianDetail) {
+                    // Student detail exists, update it
+                    $student->guardianDetail->update($guardianDetailData);
+                } else {
+                    // Student detail doesn't exist, create a new one
+                    $student->guardianDetail()->create($guardianDetailData);
+                }
+            }   
+
+        }
         
-        $student->studentDetail->update([
-            'student_nic' => $request->input('st-nic'),
-            'gender' => $request->input('gender'),
-            'blood_group' => $request->input('blood-group'),
-            'previous_school' => $request->input('prev-school'),
-            'orphan' => $request->input('orphan', 0),
-            'religion' => $request->input('religion'),
-        ]);
-        
-        $student->guardianDetail->update([
-            'guardian_role' => $request->input('role'),
-            'guardian_name' => $request->input('gName'),
-            'guardian_nic' => $request->input('gNic'),
-            'profession' => $request->input('profession'),
-            'phone_number' => $request->input('gPhone'),
-            'income' => $request->input('income'),
-        ]);
 
         // Update the desired countries relationship
         $student->countries()->sync($request->input('countries', []));

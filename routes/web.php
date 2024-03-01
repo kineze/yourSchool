@@ -22,6 +22,7 @@ use App\Http\Controllers\Office\officeDashController;
 Route::controller(genaralController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/setdashboard', 'setDashboard')->name('setDashboard');
+    Route::get('/dashboard', 'setDashboard')->name('dashboard');
 });
 
 Route::controller(AppointmentController::class)->group(function () {
@@ -32,7 +33,7 @@ Route::controller(AppointmentController::class)->group(function () {
 
 
 
-Route::middleware(['auth:sanctum', 'role:Admin|Manager|Coordinator|Finance|consultant', config('jetstream.auth_session'), 'verified',])->group(function () {
+Route::middleware(['auth:sanctum', 'role:Admin|Manager|Coordinator|Finance|Teacher', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::controller(genaralController::class)->group(function () {
         Route::get('/set-new-password', 'setNewPass')->name('setNewPass');

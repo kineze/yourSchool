@@ -168,7 +168,7 @@
                               <h6 class="mb-0 leading-normal text-sm dark:text-white">${result.name} - ${result.phone}</h6>
                           </div>
                           <div class="ml-auto my-2 text-right">
-                              <a href="/student/${result.id}" class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-full shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-black text-white hover:scale-102 active:opacity-85 bg-x-25 text-orange-500 dark:text-white">
+                              <a href="/student/${result.id}" class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-gradient-to-tl from-blue-600 to-purple-400 border-0 rounded-full shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-black text-white hover:scale-102 active:opacity-85 bg-x-25 text-orange-500 dark:text-white">
                                   <i class="mr-2 fas fa-pencil-alt text-white" aria-hidden="true"></i>View
                               </a>
                           </div>

@@ -159,6 +159,9 @@
                                     <option value="Female" {{ ($studentDetails->gender ?? '') === 'Female' ? 'selected' : '' }}>Female</option>
                                     <option value="Other" {{ ($studentDetails->gender ?? '') === 'Other' ? 'selected' : '' }}>Other</option>
                                 </select>
+                                @error('gender')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             
                             <div class="w-full max-w-full px-3 flex-0 sm:w-4/12">
@@ -174,6 +177,9 @@
                                     <option value="O+" {{ ($studentDetails->blood_group ?? '') === 'O+' ? 'selected' : '' }}>O+</option>
                                     <option value="O-" {{ ($studentDetails->blood_group ?? '') === 'O-' ? 'selected' : '' }}>O-</option>
                                 </select>
+                                @error('blood-group')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             
                         </div>

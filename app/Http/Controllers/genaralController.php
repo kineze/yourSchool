@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class genaralController extends Controller
 {
+
     public function home(){
 
             if (auth()->check()) {

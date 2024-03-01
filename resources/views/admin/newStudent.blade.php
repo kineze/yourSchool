@@ -8,7 +8,7 @@
         @csrf
         <div class="flex flex-wrap -mx-3">
             <div class="w-full max-w-full px-3 shrink-0 lg:flex-0 lg:w-6/12">
-                <h4 class="dark:text-white mx-3">New Student</h4>
+                <h4 class="dark:text-white mx-3 flex">New Student</h4>
             </div>
         </div>
 

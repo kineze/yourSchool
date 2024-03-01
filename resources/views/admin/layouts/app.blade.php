@@ -8,7 +8,7 @@
     @if(Auth::check())
         @if(Auth::user()->hasRole('Admin'))
             @include('admin.includes.sidebar')
-        @elseif(Auth::user()->hasAnyRole(['Manager', 'Coordinator', 'Finance', 'Consultant']))
+        @elseif(Auth::user()->hasAnyRole(['Manager', 'Coordinator', 'Finance', 'Teacher']))
             @include('office.includes.sidebar')
         @endif
     @endif
