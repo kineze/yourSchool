@@ -51,7 +51,7 @@ class classController extends Controller
             'alert-type' => 'success',
         ];
 
-        return redirect()->route('class', $class->id)->with($notification,'success', 'Class deleted successfully!');
+        return redirect()->route('classes')->with($notification,'success', 'Class deleted successfully!');
     }
 
     public function class($id){
