@@ -171,6 +171,12 @@ input[type="radio"]:checked + span {
                       </li>
                   @endif
 
+                  @if(isset($student->email))
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">email:</strong> &nbsp; {{$student->email}}
+                      </li>
+                  @endif
+
                   @if(isset($student->address))
                       <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
                           <strong class="text-slate-700 dark:text-white">Address:</strong> &nbsp; {{$student->address}}
@@ -279,10 +285,10 @@ input[type="radio"]:checked + span {
                     @endif
 
                     @if(isset($guardian_details->guardian_nic))
-                      <li class="relative block px-4 pt-0 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
-                          <strong class="text-slate-700 dark:text-white">Guardian Nic:</strong> &nbsp; {{$guardian_details->guardian_nic}}
-                      </li>
-                  @endif
+                        <li class="relative block px-4 pt-0 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                            <strong class="text-slate-700 dark:text-white">Guardian Nic:</strong> &nbsp; {{$guardian_details->guardian_nic}}
+                        </li>
+                    @endif
                 
                     @if(isset($guardian_details->profession))
                         <li class="relative block px-4 pt-0 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
