@@ -6,8 +6,8 @@
       <i class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times text-slate-400 dark:text-white xl:hidden" aria-hidden="true" sidenav-close-btn></i>
   
       <a class="flex justify-center items-center px-8 py-6 m-0 text-sm whitespace-nowrap text-slate-700 dark:text-white" href="{{url('/setdashboard')}}">
-        <img src="{{asset('assets/img/royal-college.png')}}" class="inline-block h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-12 dark:hidden" alt="main_logo" />
-        <img src="{{asset('assets/img/royal-college.png')}}" class="hidden h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-12 dark:inline-block" alt="main_logo" />
+        <img src="{{asset('assets/img/logo-fiinal-new.png')}}" class="inline-block h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-12 dark:hidden" alt="main_logo" />
+        <img src="{{asset('assets/img/logo-fiinal-new.png')}}" class="hidden h-full max-w-full transition-all duration-200 ease-soft-in-out max-h-12 dark:inline-block" alt="main_logo" />
         {{-- <span class="ml-1 text-3xl text-transparent bg-clip-text bg-gradient-to-tl from-orange-600 to-orange-400 font-bold  transition-all duration-200 ease-soft-in-out"></span> --}}
       </a>
     </div>
@@ -44,6 +44,36 @@
         </li> --}}
   
         {{-- Vouchers --}}
+
+
+        <li class="mt-0.5 w-full">
+          <a active_primary collapse_trigger="primary" href="javascript:;" class="after:ease-soft-in-out after:font-awesome-5-free ease-soft-in-out text-sm py-2.7 active xl:shadow-soft-xl my-0 mx-4 flex items-center whitespace-nowrap rounded-lg bg-white px-4 font-semibold text-slate-700 transition-all after:ml-auto after:inline-block after:rotate-180 after:font-bold after:text-slate-800 after:antialiased after:transition-all after:duration-200 after:content-['\f107'] dark:text-white dark:opacity-80" aria-controls="applicationsExamples" role="button" aria-expanded="true">
+            <div class="stroke-none shadow-soft-sm bg-gradient-to-tl from-blue-600 to-purple-400 mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-white bg-center fill-current p-2.5 text-center text-black">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="800px" height="800px" viewBox="0 0 1000 1000" stroke="#ffffff">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                  <g id="SVGRepo_iconCarrier">
+                  <path d="M774 739q-64 73-155 102-87 29-180 11-37-7-65-20-52-23-24-51 7 4 43 9 28 4 62 6 64 4 125-18 64-24 113-72 29-32 35-73 7-46-22-84-17-23-45-33.5t-49-2.5q-15 6-24 20-5 9-7 19v-1q6 41 11 82 6 26-5 34-6 5-24 5H440q-18 0-24-5-11-8-5-34l4-34q3-33-2.5-48T393 531q-8-3-30-4t-34-3q-20-3-37-12-10-5-27-21.5T240 470q-12-5-18 6-8 13-11 52 5 79 48 133 14 11 17 21 2 5 0 14l-1 5q-1 5-4 10-6 7-16 5-14-3-35-24-50-55-69.5-133T148 403q17-81 68-139.5T338 173q69-31 144.5-32T628 170q23 10 38.5 24t11 21-26.5 6-43-9q-71-23-149-6-17 5-36 17-11 7-29 22-14 11-19 15-17 12-41 21-19 8-29 15l4-2q-8 5-15 11-4 4-10 12 6-7-6 6-16 25-10 54 6 26 28 47 36 27 69 32t56-9.5 30-44.5q25-97 50-111h1q28 16 54 130l3 10q2 11 5 15 4 7 13 7 12-3 27-6.5t23-4.5q11-1 32 1 23 2 51 16 22 11 42 26l1 1q10 11 16 11 11 0 14-32v1q-4-50-20-112-8-32-9-42 0-17 11-26 7-2 16.5 6.5T805 323q41 65 51 139.5t-11 147T774 739zM525 577q-11-137-24-150-13 13-24 150-1 10 2.5 16.5T491 600h21q7 0 10.5-6.5T525 577z"/>
+                  </g>
+                </svg>
+            </div>
+            
+            <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft text-slate-700">Classes</span>
+          </a>
+          
+          <div class="h-auto overflow-hidden transition-all duration-200 ease-soft-in-out" id="ecommerceExamples">
+            <ul class="flex flex-wrap pl-4 mb-0 ml-6 list-none transition-all duration-200 ease-soft-in-out">
+  
+              <li class="w-full">
+                <a class="ease-soft-in-out py-1.6 ml-5.4 pl-4 text-sm before:-left-4.5 before:h-1.25 before:w-1.25 relative my-0 mr-4 flex items-center whitespace-nowrap bg-transparent pr-4 font-medium text-slate-800/50 shadow-none transition-colors before:absolute before:top-1/2 before:-translate-y-1/2 before:rounded-3xl before:bg-slate-800/50 before:content-[''] dark:text-white dark:opacity-60 dark:before:bg-white dark:before:opacity-80" href="{{url('/classes')}}">
+                  <span class="w-0 text-center transition-all duration-200 opacity-0 pointer-events-none ease-soft-in-out"> R </span>
+                  <span class="transition-all duration-100 pointer-events-none ease-soft">Classes</span>
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </li>
   
         <li class="mt-0.5 w-full">
           <a active_primary collapse_trigger="primary" href="javascript:;" class="after:ease-soft-in-out after:font-awesome-5-free ease-soft-in-out text-sm py-2.7 active xl:shadow-soft-xl my-0 mx-4 flex items-center whitespace-nowrap rounded-lg bg-white px-4 font-semibold text-slate-700 transition-all after:ml-auto after:inline-block after:rotate-180 after:font-bold after:text-slate-800 after:antialiased after:transition-all after:duration-200 after:content-['\f107'] dark:text-white dark:opacity-80" aria-controls="applicationsExamples" role="button" aria-expanded="true">

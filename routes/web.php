@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\classController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\genaralController;
@@ -89,6 +90,19 @@ Route::prefix('office')->middleware(['auth:sanctum', 'role:Manager|Finance|Coord
 
     Route::controller(officeDashController::class)->group(function () {
         Route::get('/dashboard', 'getOfficeDashboard')->name('officeDashboard');
+    });
+
+});
+
+Route::middleware(['auth:sanctum', 'role:Admin','checkPasswordReset', config('jetstream.auth_session'), 'verified',])->group(function () {
+
+    Route::controller(classController::class)->group(function () {
+        Route::get('/new-class', 'newClass')->name('newClass');
+        Route::get('/classes', 'classes')->name('classes');
+        Route::post('/store-class', 'storeClass')->name('storeClass');
+        Route::get('/class/{id}', 'class')->name('class');
+        Route::post('/delete-class/{id}', 'deleteClass')->name('deleteClass');
+        Route::post('/update-class/{id}', 'updateClass')->name('updateClass');
     });
 
 });
