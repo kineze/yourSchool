@@ -45,7 +45,7 @@
                         <th>User Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
-                        <th>counselor</th>
+                        <th>Teacher</th>
                         <th>status</th>
                         <th>Action</th>
                     </tr>
@@ -155,9 +155,9 @@
 
                             <td class="font-semibold leading-tight text-xs">
                                 <div class="flex items-center">
-                                    ${student.class !== null ?
-                                        `<span class="m-2 inline-block rounded-full border border-blue-600 px-2.5 w-19 text-center py-1 text-xs font-medium text-blue-600">${student.school_class.name}</span>` :
-                                        `<span class="m-2 inline-block rounded-full border border-red-600 px-2.5 w-19 text-center py-1 text-xs font-medium text-red-600">FALSE</span>`
+                                    ${student.class !== null && student.school_class !== null ?
+                                        `<span class="m-2 inline-block rounded-full border border-blue-600 px-2.5  text-center py-1 text-xs font-medium text-blue-600">${student.school_class.name}</span>` :
+                                        `<span class="m-2 inline-block rounded-full border border-red-600 px-2.5  text-center py-1 text-xs font-medium text-red-600">N/A</span>`
                                     }
                                 </div>
                             </td>

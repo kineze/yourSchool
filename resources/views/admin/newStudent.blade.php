@@ -83,7 +83,7 @@
 
                     <div class="flex flex-wrap -mx-3">
                         <div class="w-full max-w-full px-3 flex-0">
-                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="UserName">Student Name</label>
+                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="UserName">Student Name <span class="text-red-600">*</span></label>
                             <input type="text" name="UserName" placeholder="student name" class="{{ $errors->has('UserName') ? 'border-red-500' : 'border-gray-300' }}  focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" value="{{ old('UserName') }}"/>
                             @error('UserName')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -93,7 +93,7 @@
 
                     <div class="flex flex-wrap -mx-3">
                         <div class="w-full max-w-full px-3 mt-4 flex-0 sm:w-6/12 sm:mt-0">
-                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="admissionId">Admission Id</label>
+                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="admissionId">Admission Id <span class="text-red-600">*</span></label>
                             <input type="text" name="admission_id" placeholder="admission id" class="{{ $errors->has('admission_id') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" value="{{ old('admission_id') }}"/>
                             @error('admission_id')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -101,7 +101,7 @@
                         </div>
                         
                         <div class="w-full max-w-full px-3 flex-0  sm:w-6/12">
-                            <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="class">Class</label>
+                            <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="class">Class <span class="text-red-600">*</span></label>
                             <select choice name="class" id="choices-classes">
                                 <option value="">select class</option>
                                     @foreach ($classes as $class)
@@ -117,19 +117,24 @@
                     <div class="flex flex-wrap -mx-3">
         
                         <div class="w-full max-w-full px-3 flex-0 sm:w-6/12">
-                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="birth_date">Admission Date</label>
-                            <input datetimepicker type="date" id="admissionDatePicker" type="text" placeholder="Please select a date"  name="admission_date" class="{{ $errors->has('admission_date') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none"/>
+                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="birth_date">Admission Date <span class="text-red-600">*</span> </label>
+                            <input datetimepicker type="date" id="admissionDatePicker" value="{{ old('admission_date') }}" type="text" placeholder="Please select a date"  name="admission_date" class="{{ $errors->has('admission_date') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none"/>
                             @error('admission_date')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
                         <div class="w-full max-w-full px-3 flex-0  sm:w-6/12">
-                            <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="medium">Medium</label>
+                            <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="medium">Medium <span class="text-red-600">*</span> </label>
                             <select choice name="medium" id="choices-medium">
                                 <option value="">select Medium</option>
                                 <option value="English">English</option>
                                 <option value="Sinhala">Sinhala</option>
                             </select>
+
+                            @error('medium')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+
                         </div>
                     </div>
 
@@ -142,8 +147,8 @@
                             @enderror
                         </div>
                         <div class="w-full max-w-full px-3 flex-0 sm:w-6/12">
-                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="birth_date">Birth Date</label>
-                            <input datetimepicker type="date" id="startDatePicker" type="text" placeholder="Please select a date"  name="birth_date" class="{{ $errors->has('birth_date') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none"/>
+                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="birth_date">Birth Date <span class="text-red-600">*</span></label>
+                            <input datetimepicker type="date" id="startDatePicker" value="{{ old('birth_date') }}" type="text" placeholder="Please select a date"  name="birth_date" class="{{ $errors->has('birth_date') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none"/>
                             @error('birth_date')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
@@ -219,20 +224,23 @@
                         <h5 class="font-bold dark:text-white">Advanced Information</h5>
                         <div class="flex flex-wrap -mx-3">
                             <div class="w-full max-w-full px-3 lg:w-4/12 flex-0">
-                                <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="st-nic">Student Birth Form ID / NIC</label>
+                                <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="st-nic">Student Birth Form ID / NIC <span class="text-red-600">*</span></label>
                                 <input type="text" name="st-nic" placeholder="student " class="{{ $errors->has('st-nic') ? 'border-red-500' : 'border-gray-300' }}  focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" value="{{ old('st-nic') }}"/>
                                 @error('st-nic')
                                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                 @enderror
                             </div>
                             <div class="w-full max-w-full px-3 flex-0  sm:w-4/12">
-                                <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="gender">Gender</label>
+                                <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="gender">Gender <span class="text-red-600">*</span></label>
                                 <select choice name="gender" id="choices-gender">
                                     <option value="">select gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
                                 </select>
+                                @error('gender')
+                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                @enderror
                             </div>
                             <div class="w-full max-w-full px-3 flex-0  sm:w-4/12">
                                 <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="gender">Blood Group</label>
@@ -292,17 +300,20 @@
                     <div class="flex flex-wrap -mx-3">
                         
                         <div class="w-full max-w-full px-3 flex-0  sm:w-4/12">
-                            <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="role">Role</label>
+                            <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="role">Role <span class="text-red-600">*</span></label>
                             <select choice name="role" id="choices-role">
                                 <option value="">select Guardian</option>
                                 <option value="Father">Father</option>
                                 <option value="Mother">Mother</option>
                                 <option value="Other">Other</option>
                             </select>
+                            @error('role')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="w-full max-w-full px-3 lg:w-4/12 flex-0">
-                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="gName">Guardian Name</label>
+                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="gName">Guardian Name <span class="text-red-600">*</span></label>
                             <input type="text" name="gName" placeholder="gaurdian name " class="{{ $errors->has('gName') ? 'border-red-500' : 'border-gray-300' }}  focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" value="{{ old('gName') }}"/>
                             @error('gName')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
@@ -331,7 +342,7 @@
                         </div>
 
                         <div class="w-full max-w-full px-3 flex-0 sm:w-4/12">
-                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="phone">Phone</label>
+                            <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="phone">Phone <span class="text-red-600">*</span></label>
                             <div class="flex items-center">
                                 <input type="text" name="phone" placeholder="XXXXXXXXXX" 
                                     class="{{ $errors->has('phone') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" 

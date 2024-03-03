@@ -60,16 +60,16 @@ class studentController extends Controller
             'location' => 'required|exists:locations,id',
             'image_path' => 'nullable|string|max:255',
 
-            'st-nic' => 'nullable|string|max:255',
-            'gender' => 'nullable|in:Male,Female,Other',
+            'st-nic' => 'required|string|max:255',
+            'gender' => 'required|in:Male,Female,Other',
             'blood-group' => 'nullable|in:A+,A-,B+,B-,AB+,AB-,O+,O-',
             'prev-school' => 'nullable|string|max:255',
             'orphan' => 'nullable|boolean',
             'religion' => 'nullable|in:Christianity,Islam,Hinduism,Buddhism',
 
             // Validation rules for guardian information (only if checkbox is checked)
-            'role' => 'nullable|in:Father,Mother,Other',
-            'gName' => 'nullable|string|max:255',
+            'role' => 'required|in:Father,Mother,Other',
+            'gName' => 'required|string|max:255',
             'gNic' => 'nullable|string|max:255',
             'profession' => 'nullable|string|max:255',
             'whatsapp' => 'nullable|string|max:255',
@@ -231,7 +231,9 @@ class studentController extends Controller
 
         $countries = Country::get();
 
-        return view('admin.editStudent', compact('user','studentDetails','guardianDetails', 'student', 'countries'));
+        $classes = SchoolClass::get();
+
+        return view('admin.editStudent', compact('user','classes','studentDetails','guardianDetails', 'student', 'countries'));
 
     }
 
@@ -254,31 +256,44 @@ class studentController extends Controller
         $request->validate([
             'UserName' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
-            'phone' => 'required|string|max:20',
+            'phone' => 'required|string|max:255',
             'address' => 'nullable|string|max:255',
-            'birth_date' => 'nullable|date',
-            'countries' => 'nullable|array',
-            'countries.*' => 'exists:countries,id',
-            'stu-img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'birth_date' => 'required|date',
+            'admission_date' => 'required|date',
+            'medium' => 'required|in:English,Sinhala',
+            'admission_id' => 'required',
+            'class' => 'required|exists:school_classes,id',
+            'location' => 'required|exists:locations,id',
+            'image_path' => 'nullable|string|max:255',
 
-            'st-nic' => 'nullable|string|max:255',
-            'gender' => 'nullable|in:Male,Female,Other',
+            'st-nic' => 'required|string|max:255',
+            'gender' => 'required|in:Male,Female,Other',
             'blood-group' => 'nullable|in:A+,A-,B+,B-,AB+,AB-,O+,O-',
             'prev-school' => 'nullable|string|max:255',
             'orphan' => 'nullable|boolean',
             'religion' => 'nullable|in:Christianity,Islam,Hinduism,Buddhism',
 
             // Validation rules for guardian information (only if checkbox is checked)
-            'role' => 'nullable|in:Father,Mother,Other',
-            'gName' => 'nullable|string|max:255',
+            'role' => 'required|in:Father,Mother,Other',
+            'gName' => 'required|string|max:255',
             'gNic' => 'nullable|string|max:255',
             'profession' => 'nullable|string|max:255',
-            'gPhone' => 'nullable|string|max:20',
-            'income' => 'nullable|string|max:255',
+            'whatsapp' => 'nullable|string|max:255',
         ]);
-       
 
+        $birthDate = Carbon::parse($request->input('birth_date'));
+        $age = Carbon::now()->diffInYears($birthDate);
+       
         $student = Student::findOrFail($id);
+
+        $user = User::findOrfail($student->user_id);
+
+        $user->name = $request->UserName;
+        $user->user_name = $request->admission_id;
+        $user->phone = $request->phone;
+        $user->password = $request->admission_id;
+
+        $user->save();
 
         if ($request->hasFile('webcam_capture_file')) {
             if ($student->image_path) {
@@ -297,71 +312,50 @@ class studentController extends Controller
             $student->image_path = $imagePath;
         }
 
-        // Update other fields
-        $student->name = $request->input('UserName');
-        $student->email = $request->input('email');
-        $student->phone = $request->input('phone');
-        $student->address = $request->input('address');
-        $student->birth_date = $request->input('birth_date');
+            $student->name = $request->UserName;
+            $student->email = $request->email;
+            $student->phone = $request->phone;
+            $student->address = $request->address;
+            $student->birth_date = $request->birth_date;
+            $student->admission_date = $request->admission_date;
+            $student->medium = $request->medium;
+            $student->admission_id = $request->admission_id;
+            $student->age = $age;
+            $student->user_id = $user->id;
+            $student->class_id = $request->class;
+            $student->location_id = $request->location;
 
 
-        $student->save();
+            $student->save();
 
-        if ($request->has('advanced-c')) {
-            $studentDetailData = [
-                'student_nic' => $request->input('st-nic'),
-                'gender' => $request->input('gender'),
-                'blood_group' => $request->input('blood-group'),
-                'previous_school' => $request->input('prev-school'),
-                'orphan' => $request->input('orphan', 0),
-                'religion' => $request->input('religion'),
+            if ($request->has('advanced-c')) {
+                $student->studentDetail()->update([
+                    'student_nic' => $request->input('st-nic'),
+                    'gender' => $request->input('gender'),
+                    'blood_group' => $request->input('blood-group'),
+                    'previous_school' => $request->input('prev-school'),
+                    'orphan' => $request->input('orphan', 0),
+                    'religion' => $request->input('religion'),
+                ]);
+            }
+
+            if ($request->has('gaurdian-c')) {
+                $student->guardianDetail()->update([
+                    'guardian_role' => $request->input('role'),
+                    'guardian_name' => $request->input('gName'),
+                    'guardian_nic' => $request->input('gNic'),
+                    'profession' => $request->input('profession'),
+                    'phone_number' => $request->input('phone'),
+                    'whatsapp_number' => $request->input('whatsapp'),
+                ]);
+            }
+    
+            $notification = [
+                'message' => 'Student Updated successfully',
+                'alert-type' => 'success',
             ];
 
-            if (collect($studentDetailData)->filter()->isNotEmpty()) {
-                if ($student->studentDetail) {
-                    // Student detail exists, update it
-                    $student->studentDetail->update($studentDetailData);
-                } else {
-                    // Student detail doesn't exist, create a new one
-                    $student->studentDetail()->create($studentDetailData);
-                }
-            }    
-
-        }
-
-        if($request->has('gaurdian-c')){
-
-            $guardianDetailData = [
-                'guardian_role' => $request->input('role'),
-                'guardian_name' => $request->input('gName'),
-                'guardian_nic' => $request->input('gNic'),
-                'profession' => $request->input('profession'),
-                'phone_number' => $request->input('gPhone'),
-                'income' => $request->input('income'),
-            ];
-
-            if (collect($guardianDetailData)->filter()->isNotEmpty()) {
-                if ($student->guardianDetail) {
-                    // Student detail exists, update it
-                    $student->guardianDetail->update($guardianDetailData);
-                } else {
-                    // Student detail doesn't exist, create a new one
-                    $student->guardianDetail()->create($guardianDetailData);
-                }
-            }   
-
-        }
-        
-
-        // Update the desired countries relationship
-        $student->countries()->sync($request->input('countries', []));
-
-        $notification = [
-            'message' => 'Student Updated successfully',
-            'alert-type' => 'success',
-        ];
-
-        return redirect()->back()->with($notification,'success', 'Student updated successfully!');
+        return redirect()->route('student', $student->id)->with($notification,'success', 'Student updated successfully!');
     }
 
     public function assignConsultant(Request $request, $studentId)

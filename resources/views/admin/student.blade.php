@@ -30,40 +30,115 @@ input[type="radio"]:checked + span {
     <div class="flex w-full flex-wrap -mx-3">
         <div class="w-full flex max-w-full px-3 shrink-0 lg:flex-0 lg:w-6/12">
             <h4 class="dark:text-white mx-3 text-lg">{{$student->name}} </h4>
+            <span>
+              <td class="font-semibold leading-tight text-xs">
+                <div class="flex flex-wrap gap-4 max-w-48 sm:flex-0 shrink-0 sm:mt-0 sm:ml-auto sm:w-auto">
+                        @if($student->medium)
+                            <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-green-200 text-slate-650 align-baseline font-bold uppercase leading-none">{{ $student->medium }}</span>
+                        @endif
+                </div>
+            </td>
+            </span>
         </div>
     </div>
     <div class="flex gap-x-2 items-center">
-      @if($student->consultant !== null)
-        <button type="button" data-toggle="modal" data-target="#appointmentModal" class="whitespace-nowrap inline-block px-8 py-2 font-bold text-center uppercase align-middle transition-all bg-transparent border-solid rounded-lg shadow-none cursor-pointer active:opacity-85 leading-pro text-xs ease-soft-in tracking-tight-soft bg-150 bg-x-25 hover:scale-102 active:shadow-soft-xs border border-blue-700 text-blue-500 hover:text-blue-500 hover:opacity-75 hover:shadow-none active:scale-100 active:border-orange-500 active:bg-orange-500 active:text-white hover:active:border-orange-500 hover:active:bg-transparent hover:active:text-orange-500 hover:active:opacity-75"><i class="fas fa-plus mr-2"></i>Appoinment</button>
-      @endif
         <a href="{{route('editStudent', $student->id)}}" class="whitespace-nowrap inline-block px-8 py-2 font-bold text-center uppercase align-middle transition-all bg-transparent border-solid rounded-lg shadow-none cursor-pointer active:opacity-85 leading-pro text-xs ease-soft-in tracking-tight-soft bg-150 bg-x-25 hover:scale-102 active:shadow-soft-xs border border-orange-700 text-orange-500 hover:text-orange-500 hover:opacity-75 hover:shadow-none active:scale-100 active:border-orange-500 active:bg-orange-500 active:text-white hover:active:border-orange-500 hover:active:bg-transparent hover:active:text-orange-500 hover:active:opacity-75"><i class="fas fa-plus mr-2"></i>Update</a>
         <form action="{{ route( 'deleteStudent', $student->id ) }}" id="delete-form-{{ $student->id }}" method="POST">
             @csrf
             <button type="submit" class="inline-block px-4 py-2 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border border-red-300 rounded-lg shadow-none cursor-pointer leading-pro ease-soft-in text-xs text-red-500 hover:scale-102 active:shadow-soft-xs tracking-tight-soft hover:border-red-500 hover:bg-transparent hover:text-red-500 hover:opacity-75 hover:shadow-none active:bg-red-500 active:text-white active:hover:bg-transparent active:hover:text-red-500" onclick="ConfirmDelete(event, {{ $student->id }})">Delete</button>
         </form>
     </div>
-
-    
     </div>
 
     <div class="flex flex-wrap -mx-3">
       <div class="w-full max-w-full px-3 flex-0">
-        <div class="flex flex-wrap -mx-3">
-          <div class="w-full max-w-full justify-center items-center h-full px-3 flex lg:w-4/12">
-            <div data-tilt class=" dark:bg-gray-950 dark:shadow-soft-dark-xl after:z-1 relative flex h-full min-w-0 flex-col items-center break-words rounded-2xl border-0  after:absolute after:top-0 after:left-0 after:block after:h-full after:w-full after:rounded-2xl  after:content-['']" style="transform-style: preserve-3d; will-change: transform; transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)">
-              <div class="mb-7 absolute h-full w-full rounded-2xl"></div>
-                <div class="relative flex-auto text-center text-white z-2">
+        
+        <div class="w-full max-w-full mb-6 flex-0">
+          <div class="flex flex-wrap  items-start w-full text-white transition-all duration-200 text-base ease-soft-in-out rounded-xl">
+            
+            <div class="flex gap-12 mb-4 lg:w-8/12 justify-between w-full">
+            
+            <div  class=" dark:bg-gray-950 dark:shadow-soft-dark-xl after:z-1 relative flex h-full min-w-0  items-center break-words rounded-2xl border-0   after:h-full  ">
+              <div class=" h-full  w-full rounded-2xl"></div>
+                <div class=" text-center text-white">
                     <div id="img-placeholder" class="w-full max-w-full !flex justify-center">
                         @if($student->image_path)
-                            <img id="previewImage" class="w-44 mt-4 h-44 rounded-full object-cover" src="{{ asset('/storage/'.$student->image_path) }}" alt="">
+                            <img id="previewImage" class="w-32 h-32 rounded-full object-cover" src="{{ asset('/storage/'.$student->image_path) }}" alt="">
                         @else
                             <!-- Placeholder image when student's image path is null -->
-                            <img id="placeholderImage" class="w-44 mt-4 h-44 rounded-full object-cover" src="{{ asset('assets/img/user.jpg') }}" alt="Placeholder Image">
+                            <img id="placeholderImage" class="w-32 h-32 rounded-full object-cover" src="{{ asset('assets/img/user.jpg') }}" alt="Placeholder Image">
                         @endif
                     </div>
                 </div>
             </div>
+
+            <div class=" max-w-full w-full">
+              <div class="relative flex items-center  h-full min-w-0 break-words bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border">
+                <div class="flex-auto items-center w-full px-4">
+                  <ul class="block items-center justify-between pl-0 mb-0 rounded-lg">
+                    @if(isset($student->schoolClass))
+                        <li class="flex items-center justify-between  py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
+                            <strong class="text-slate-700 dark:text-white">Class name:</strong> &nbsp;
+
+                            <span>
+                              <td class="font-semibold leading-tight text-xs">
+                                <div class="flex flex-wrap  max-w-48 sm:flex-0 shrink-0 sm:mt-0 sm:ml-auto sm:w-auto">
+                                        @if($student->schoolClass)
+                                            <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-slate-200 text-slate-650 align-baseline font-bold uppercase leading-none">{{ $student->schoolClass->name }}</span>
+                                        @endif
+                                </div>
+                              </td>
+                            </span>
+
+                        </li>
+                    @endif
+
+                    @if(isset($student->schoolClass))
+                    <li class="flex items-center justify-between  py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
+                        <strong class="text-slate-700 dark:text-white">Teacher:</strong> &nbsp;
+
+                        <span>
+                          <td class="font-semibold leading-tight text-xs">
+                            <div class="flex flex-wrap gap-4 max-w-48 sm:flex-0 shrink-0 sm:mt-0 sm:ml-auto sm:w-auto">
+                                  <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-blue-200 text-slate-650 align-baseline font-bold uppercase leading-none">{{ $student->schoolClass->teacher->name }}</span>
+                            </div>
+                          </td>
+                        </span>
+
+                    </li>
+                @endif
+              
+                </ul>
+                
+                </div>
+              </div>
+            </div>
+            </div>
+
+            
+
+        
+
+            
+              <div class="flex lg:w-4/12 pl-4 justify-end w-full ">
+                  <label for="plan-growth" class="relative w-full  flex flex-col bg-white p-5 rounded-lg shadow-md cursor-pointer">
+                  <span class="font-semibold text-gray-500 leading-tight uppercase mb-3">Nenamal Royal <br> College - {{$student->location->name}}</span>
+                  <input type="radio" name="location" id="plan-growth" value="1" class="absolute h-0 w-0 appearance-none" checked />
+                  <span aria-hidden="true" class="hidden absolute inset-0 border-2 border-blue-500 bg-blue-200 bg-opacity-10 rounded-lg">
+                      <span class="absolute top-4 right-4 h-6 w-6 inline-flex items-center justify-center rounded-full bg-blue-200">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-blue-600">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      </span>
+                  </span>
+                  </label>
+              </div>
+
           </div>
+      </div>
+
+        <div class="flex flex-wrap -mx-3">
+          
 
           @if($student)
           <div class="w-full max-w-full px-3 lg-max:mt-6 xl:w-4/12">
@@ -75,7 +150,7 @@ input[type="radio"]:checked + span {
                   </div>
                 </div>
               </div>
-              <div class="flex-auto px-4 pb-4">
+              <div class="flex-auto px-4">
                 <hr class="h-px my-3 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent">
                 <ul class="flex flex-col pl-0 mb-0 rounded-lg">
                   @if(isset($student->name))
@@ -83,36 +158,99 @@ input[type="radio"]:checked + span {
                           <strong class="text-slate-700 dark:text-white">Full Name:</strong> &nbsp; {{$student->name}}
                       </li>
                   @endif
-              
-                  @if(isset($student->phone))
-                      <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
-                          <strong class="text-slate-700 dark:text-white">Mobile:</strong> &nbsp;{{$student->phone}}
+
+                  @if(isset($student->admission_date))
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">Admission Date:</strong> &nbsp; {{$student->admission_date}}
                       </li>
                   @endif
-              
-                  @if(isset($student->email))
-                      <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
-                          <strong class="text-slate-700 dark:text-white">Email:</strong> &nbsp; {{$student->email}}
+
+                  @if(isset($student->admission_id))
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">Admission Id:</strong> &nbsp; {{$student->admission_id}}
                       </li>
                   @endif
-              
+
                   @if(isset($student->address))
-                      <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
                           <strong class="text-slate-700 dark:text-white">Address:</strong> &nbsp; {{$student->address}}
                       </li>
                   @endif
 
                   @if(isset($student->birth_date))
-                      <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
                           <strong class="text-slate-700 dark:text-white">Birth Date:</strong> &nbsp; {{$student->birth_date}}
                       </li>
                   @endif
+
+                  @if(isset($student->age))
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">Age:</strong> &nbsp; {{$student->age}}
+                      </li>
+                  @endif
+                 
               </ul>
               
               </div>
             </div>
           </div>
+
         @endif
+
+        @if($student_details)
+          <div class="w-full max-w-full px-3 lg-max:mt-6 xl:w-4/12">
+            <div class="relative flex flex-col h-full min-w-0 break-words bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border">
+              <div class="p-4 pb-0 mb-0 border-b-0 rounded-t-2xl">
+                <div class="flex flex-wrap -mx-3">
+                  <div class="flex items-center w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-none">
+                    <h6 class="mb-0 dark:text-white">Advance Information</h6>
+                  </div>
+                 
+                </div>
+              </div>
+              <div class="flex-auto px-4 pb-4">
+                <hr class="h-px my-3 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent">
+                <ul class="flex flex-col pl-0 mb-0 rounded-lg">
+                  @if($student_details->student_nic)
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">Student BirthId/NIC:</strong> &nbsp; {{$student_details->student_nic}}
+                      </li>
+                  @endif
+              
+                  @if($student_details->gender)
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">Gender:</strong> &nbsp; {{$student_details->gender}}
+                      </li>
+                  @endif
+              
+                  @if($student_details->blood_group)
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">Blood Group:</strong> &nbsp; {{$student_details->blood_group}}
+                      </li>
+                  @endif
+              
+                  @if($student_details->previous_school)
+                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">Previos School:</strong> &nbsp; {{$student_details->previous_school}}
+                      </li>
+                  @endif
+              
+                  @if($student_details->orphan)
+                      <li class="relative block px-4 py-2 pl-0 pt-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">Orphan:</strong> &nbsp; {{$student_details->orphan}}
+                      </li>
+                  @endif
+              
+                  @if($student_details->religion)
+                      <li class="relative block px-4 py-2 pl-0 pt-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                          <strong class="text-slate-700 dark:text-white">religion:</strong> &nbsp; {{$student_details->religion}}
+                      </li>
+                  @endif
+              </ul>
+              </div>
+            </div>
+          </div>
+          @endif
 
 
           @if($guardian_details)
@@ -135,87 +273,32 @@ input[type="radio"]:checked + span {
                     @endif
                 
                     @if(isset($guardian_details->guardian_name))
-                        <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                        <li class="relative block px-4 pt-0 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
                             <strong class="text-slate-700 dark:text-white">Guardian Name:</strong> &nbsp; {{$guardian_details->guardian_name}}
                         </li>
                     @endif
                 
                     @if(isset($guardian_details->profession))
-                        <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                        <li class="relative block px-4 pt-0 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
                             <strong class="text-slate-700 dark:text-white">Profession:</strong> &nbsp; {{$guardian_details->profession}}
                         </li>
                     @endif
                 
                     @if(isset($guardian_details->phone_number))
-                        <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                        <li class="relative block px-4 pt-0 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
                             <strong class="text-slate-700 dark:text-white">Phone:</strong> &nbsp; {{$guardian_details->phone_number}}
                         </li>
                     @endif
                 
-                    @if(isset($guardian_details->income))
-                        <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
-                            <strong class="text-slate-700 dark:text-white">Income:</strong> &nbsp; {{$guardian_details->income}}
+                    @if(isset($guardian_details->whatsapp_number))
+                        <li class="relative block px-4 pt-0 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
+                            <strong class="text-slate-700 dark:text-white">Whatsapp No:</strong> &nbsp; {{$guardian_details->whatsapp_number}}
                         </li>
                     @endif
                 </ul>                
                 </div>
               </div>
             </div>
-          @endif
-
-          @if($student_details)
-          <div class="w-full max-w-full px-3 lg-max:mt-6 xl:w-4/12">
-            <div class="relative flex flex-col h-full min-w-0 break-words bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border">
-              <div class="p-4 pb-0 mb-0 border-b-0 rounded-t-2xl">
-                <div class="flex flex-wrap -mx-3">
-                  <div class="flex items-center w-full max-w-full px-3 shrink-0 md:w-8/12 md:flex-none">
-                    <h6 class="mb-0 dark:text-white">Advance Information</h6>
-                  </div>
-                 
-                </div>
-              </div>
-              <div class="flex-auto px-4 pb-4">
-                <hr class="h-px my-3 bg-transparent bg-gradient-to-r from-transparent via-white to-transparent">
-                <ul class="flex flex-col pl-0 mb-0 rounded-lg">
-                  @if($student_details->student_nic)
-                      <li class="relative block px-4 py-2 pt-0 pl-0 leading-normal border-0 rounded-t-lg text-sm text-inherit">
-                          <strong class="text-slate-700 dark:text-white">Student BirthId/NIC:</strong> &nbsp; {{$student_details->student_nic}}
-                      </li>
-                  @endif
-              
-                  @if($student_details->gender)
-                      <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
-                          <strong class="text-slate-700 dark:text-white">Gender:</strong> &nbsp; {{$student_details->gender}}
-                      </li>
-                  @endif
-              
-                  @if($student_details->blood_group)
-                      <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
-                          <strong class="text-slate-700 dark:text-white">Blood Group:</strong> &nbsp; {{$student_details->blood_group}}
-                      </li>
-                  @endif
-              
-                  @if($student_details->previous_school)
-                      <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
-                          <strong class="text-slate-700 dark:text-white">Previos School:</strong> &nbsp; {{$student_details->previous_school}}
-                      </li>
-                  @endif
-              
-                  @if($student_details->orphan)
-                      <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
-                          <strong class="text-slate-700 dark:text-white">Orphan:</strong> &nbsp; {{$student_details->orphan}}
-                      </li>
-                  @endif
-              
-                  @if($student_details->religion)
-                      <li class="relative block px-4 py-2 pl-0 leading-normal border-0 border-t-0 text-sm text-inherit">
-                          <strong class="text-slate-700 dark:text-white">religion:</strong> &nbsp; {{$student_details->religion}}
-                      </li>
-                  @endif
-              </ul>
-              </div>
-            </div>
-          </div>
           @endif
 
         </div>
