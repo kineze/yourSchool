@@ -18,9 +18,16 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address')->nullable();
             $table->date('birth_date');
+            $table->date('admission_date');
+            $table->enum('medium', ['English', 'Sinhala']);
+            $table->string('admission_id');
             $table->unsignedInteger('age');
-            $table->unsignedBigInteger('consultant_id')->nullable();
-            $table->foreign('consultant_id')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('class_id')->nullable();
+            $table->foreign('class_id')->references('id')->on('school_classes')->onDelete('set null');
+            $table->unsignedBigInteger('location_id')->nullable();
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('set null');
             $table->string('image_path')->nullable();
             $table->timestamps();
         });

@@ -7,6 +7,7 @@ use App\Http\Controllers\genaralController;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\dashboardController;
+use App\Http\Controllers\Admin\teacherController;
 use App\Http\Controllers\Office\officeDashController;
 
 /*
@@ -103,6 +104,13 @@ Route::middleware(['auth:sanctum', 'role:Admin','checkPasswordReset', config('je
         Route::get('/class/{id}', 'class')->name('class');
         Route::post('/delete-class/{id}', 'deleteClass')->name('deleteClass');
         Route::post('/update-class/{id}', 'updateClass')->name('updateClass');
+    });
+
+    Route::controller(teacherController::class)->group(function () {
+        Route::get('/new-teacher', 'newTeacher')->name('newTeacher');
+        Route::get('/teachers', 'teachers')->name('teachers');
+        Route::post('/store-teacher', 'storeTeacher')->name('storeTeacher');
+        Route::get('/teacher/{id}', 'teacher')->name('teacher');
     });
 
 });

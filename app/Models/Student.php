@@ -10,36 +10,24 @@ class Student extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'address',
-        'birth_date',
-        'age',
-        'course_category',
-        'consultant_id',
-        'highest_qualification',
-        'image_path',
+        'name', 'email', 'phone', 'address', 'birth_date', 'admission_date',
+        'medium', 'admission_id', 'age', 'user_id', 'class_id', 'location_id', 'image_path',
     ];
-
-    public function countries()
-    {
-        return $this->belongsToMany(Country::class)->withTimestamps();
-    }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function consultant()
+    // Relationship with SchoolClass model
+    public function schoolClass()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(SchoolClass::class, 'class_id');
     }
 
-    public function appointment()
+    public function location()
     {
-        return $this->hasMany(appointment::class);
+        return $this->belongsTo(Location::class, 'location_id');
     }
 
     public function studentDetail()

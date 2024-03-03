@@ -20,6 +20,21 @@ if (document.getElementById("choices-blood-group")) {
   const example = new Choices(bloodGroup );
 }
 
+if (document.getElementById("choices-classes")) {
+  var schoolClass = document.getElementById("choices-classes");
+  const example = new Choices(schoolClass, {
+    searchEnabled: false,
+  });
+}
+
+if (document.getElementById("choices-medium")) {
+  var medium = document.getElementById("choices-medium");
+  const example = new Choices(medium, {
+    searchEnabled: false,
+  });
+}
+
+
 if (document.getElementById("choices-language")) {
   var language = document.getElementById("choices-language");
   const example = new Choices(language);

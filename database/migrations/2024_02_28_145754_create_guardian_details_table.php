@@ -16,9 +16,10 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained()->onDelete('cascade');
             $table->enum('guardian_role', ['Father', 'Mother', 'Other']);
             $table->string('guardian_name');
+            $table->string('guardian_nic')->nullable();
             $table->string('profession')->nullable();
             $table->string('phone_number')->nullable();
-            $table->string('income')->nullable();
+            $table->string('whatsapp_number')->nullable();
             $table->timestamps();
         });
     }

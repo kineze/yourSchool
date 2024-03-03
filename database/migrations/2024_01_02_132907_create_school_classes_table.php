@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('school_classes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('teacher_id');
-            $table->foreign('teacher_id')->references('id')->on('users'); // Assuming 'users' is your users table
+            $table->unsignedBigInteger('teacher_id')->nullable();
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('set null'); // Assuming 'users' is your users table
             $table->decimal('amount', 10, 2); // Adjust precision and scale as needed
             $table->timestamps();
         });

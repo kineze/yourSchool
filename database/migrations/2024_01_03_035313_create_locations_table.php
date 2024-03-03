@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('guardian_details', function (Blueprint $table) {
-            $table->string('guardian_nic')->after('income')->nullable();
+        Schema::create('locations', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('address');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('guardian_details', function (Blueprint $table) {
-            $table->dropColumn('guardian_nic');
-        });
+        Schema::dropIfExists('locations');
     }
 };

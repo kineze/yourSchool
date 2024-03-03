@@ -8,7 +8,7 @@
         @csrf
         <div class="flex flex-wrap -mx-3">
             <div class="w-full max-w-full px-3 shrink-0 lg:flex-0 lg:w-6/12">
-            <h4 class="dark:text-white mx-3">Create New User</h4>
+            <h4 class="dark:text-white mx-3">Create New Teacher</h4>
             {{-- <p>We’re constantly trying to express ourselves and actualize our dreams. If you have the opportunity to play.</p> --}}
             </div>
             {{-- <div class="flex flex-col justify-center w-full max-w-full px-3 text-right shrink-0 lg:flex-0 lg:w-6/12">
@@ -19,7 +19,7 @@
             <div class="w-full max-w-full px-3 mt-6 shrink-0 lg:flex-0 lg:w-8/12 lg:mt-0">
                 <div class="relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border">
                 <div class="flex-auto p-6">
-                    <h5 class="font-bold dark:text-white">user Information</h5>
+                    <h5 class="font-bold dark:text-white">Teacher Information</h5>
                     <div class="flex flex-wrap -mx-3">
                         <div class="w-full max-w-full px-3 flex-0">
                             <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="UserName">UserName</label>
@@ -104,7 +104,7 @@
                 </div>
             </div> 
 
-            <div class="w-full max-w-full shrink-0 lg:w-4/12 sm:flex-0">
+            <div class="w-full max-w-full hidden  shrink-0 lg:w-4/12 sm:flex-0">
                 <div class=" relative flex flex-col min-w-0 break-words bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border">
                 <div class="flex-auto p-6">
                     <h5 class="font-bold dark:text-white">Access Levels</h5>
@@ -115,38 +115,12 @@
                     
                     <div class="grid h-fit w-full sm:grid-cols-1 gap-2">
 
-                        @role('Admin')
-                            <div class="relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                                <label>
-                                <input  id="checkbox-1" name="roles[]" value="Admin" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                                <label for="checkbox-1" class="cursor-pointer select-none text-slate-700">Admin</label>
-                                </label>
-                            </div>
-                            
-                            <div class="relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                                <label>
-                                <input id="checkbox-2" name="roles[]" value="Manager" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                                <label for="checkbox-2" class="cursor-pointer select-none text-slate-700">Manager</label>
-                                </label>
-                            </div>
-                        @endrole
-
-                        @role('Admin|Manager')
-                            <div class="relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                                <label>
-                                <input id="checkbox-3" name="roles[]" value="Coordinator" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                                <label for="checkbox-3" class="cursor-pointer select-none text-slate-700">Coordinator</label>
-                                </label>
-                            </div>
-
                             <div class="relative flex {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
                                 <label>
-                                <input id="checkbox-5" name="roles[]" value="Finance" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                                <label for="checkbox-5" class="cursor-pointer select-none text-slate-700">Finance</label>
+                                <input id="checkbox-4" name="roles[]" value="Teacher" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" checked/>
+                                <label for="checkbox-4" class="cursor-pointer select-none text-slate-700">Teacher</label>
                                 </label>
                             </div>
-                        @endrole
-
 
                     </div>
         

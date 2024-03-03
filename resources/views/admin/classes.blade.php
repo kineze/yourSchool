@@ -39,7 +39,7 @@
                                         <button type="button" data-toggle="modal" data-target="#class-{{ $class->id }}" class="inline-block px-4 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none cursor-pointer leading-pro text-xs ease-soft-in bg-150 hover:scale-102 active:opacity-85 bg-x-25 text-slate-700 dark:text-white" href="javascript:;"><i class="mr-2 fas fa-pencil-alt text-slate-700" aria-hidden="true"></i>Edit</button>
                                     </div>
                                 </div>
-                                <span class="mb-2 leading-tight text-xs">Class Tacher: <span class="font-semibold text-slate-700 dark:text-white sm:ml-2">{{$class->teacher->name}}</span></span>
+                                <span class="mb-2 leading-tight text-xs">Class Tacher: <span class="font-semibold text-slate-700 dark:text-white sm:ml-2">{{ $class->teacher ? $class->teacher->name : 'N/A' }}</span></span>
                                 <span class="mb-2 leading-tight text-xs">Class Fee: <span class="font-semibold text-slate-700 dark:text-white sm:ml-2">{{$class->amount}}</span></span>
                             </div>
                         </li>
@@ -139,7 +139,7 @@
                             <div class="flex flex-wrap -mx-3">
                                 <div class="w-full max-w-full px-3 flex-0">
                                     <label class="mb-2 mt-6 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="teacher">Teacher</label>
-                                    <select choice name="teacher" id="choices-gender">
+                                    <select choice name="teacher" id="choices-classes">
                                         <option value="">Select Teacher</option>
                                         @foreach ($teachers as $teacher)
                                         <option value="{{$teacher->id}}">{{$teacher->name}}</option>

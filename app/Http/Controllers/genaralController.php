@@ -98,12 +98,13 @@ class genaralController extends Controller
 
         // If the authenticated user is a Manager, get specific roles
         if ($authUser->hasRole('Manager')) {
-            $allowedRoles = ['Coordinator', 'Finance', 'Manager', 'Teacher'];
+            $allowedRoles = ['Coordinator', 'Finance', 'Manager'];
             $users = User::role($allowedRoles)->get();
         }
         // If the authenticated user is an Admin, get all users
         elseif ($authUser->hasRole('Admin')) {
-            $users = User::get();
+            $allowedRoles = ['Admin', 'Coordinator', 'Finance', 'Manager'];
+            $users = User::role($allowedRoles)->get();
         }
         // If the authenticated user has a different role, show a message
         else {
@@ -131,10 +132,12 @@ class genaralController extends Controller
 
     public function getUpdateUser($id){
 
-        $user = User::findOrfail($id);
-        $userRoles = $user->roles->pluck('name')->toArray();
+        $user = Auth::user();
 
-        return view('admin.updateUser', compact('user', 'userRoles'));
+        $userUpdate = User::findOrfail($id);
+        $userRoles = $userUpdate->roles->pluck('name')->toArray();
+
+        return view('admin.updateUser', compact('user','userUpdate', 'userRoles'));
     }
 
 
