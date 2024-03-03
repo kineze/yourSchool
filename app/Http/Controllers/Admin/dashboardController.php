@@ -24,7 +24,7 @@ class dashboardController extends Controller
 
         $appointment = Appointment::get();
 
-        return view('admin.Dashboard', compact('user', 'students','teachers', 'appointment'));
+        return view('admin.dashboard', compact('user', 'students','teachers', 'appointment'));
     }
 
     public function getTimeSlots(){
