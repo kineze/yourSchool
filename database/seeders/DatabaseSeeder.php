@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call(roleSeeder::class);
-        $this->call(AdminUserSeeder::class);
+        $this->call(adminUserSeeder::class);
         $this->call(TimeSlotsSeeder::class);
         $this->call(LocationSeeder::class);
     }
