@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\classController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\genaralController;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Admin\dashboardController;
+use App\Http\Controllers\Admin\teacherController;
 use App\Http\Controllers\Office\officeDashController;
 
 /*
@@ -22,6 +24,7 @@ use App\Http\Controllers\Office\officeDashController;
 Route::controller(genaralController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/setdashboard', 'setDashboard')->name('setDashboard');
+    Route::get('/dashboard', 'setDashboard')->name('dashboard');
 });
 
 Route::controller(AppointmentController::class)->group(function () {
@@ -32,7 +35,7 @@ Route::controller(AppointmentController::class)->group(function () {
 
 
 
-Route::middleware(['auth:sanctum', 'role:Admin|Manager|Coordinator|Finance|consultant', config('jetstream.auth_session'), 'verified',])->group(function () {
+Route::middleware(['auth:sanctum', 'role:Admin|Manager|Coordinator|Finance|Teacher', config('jetstream.auth_session'), 'verified',])->group(function () {
 
     Route::controller(genaralController::class)->group(function () {
         Route::get('/set-new-password', 'setNewPass')->name('setNewPass');
@@ -88,6 +91,26 @@ Route::prefix('office')->middleware(['auth:sanctum', 'role:Manager|Finance|Coord
 
     Route::controller(officeDashController::class)->group(function () {
         Route::get('/dashboard', 'getOfficeDashboard')->name('officeDashboard');
+    });
+
+});
+
+Route::middleware(['auth:sanctum', 'role:Admin','checkPasswordReset', config('jetstream.auth_session'), 'verified',])->group(function () {
+
+    Route::controller(classController::class)->group(function () {
+        Route::get('/new-class', 'newClass')->name('newClass');
+        Route::get('/classes', 'classes')->name('classes');
+        Route::post('/store-class', 'storeClass')->name('storeClass');
+        Route::get('/class/{id}', 'class')->name('class');
+        Route::post('/delete-class/{id}', 'deleteClass')->name('deleteClass');
+        Route::post('/update-class/{id}', 'updateClass')->name('updateClass');
+    });
+
+    Route::controller(teacherController::class)->group(function () {
+        Route::get('/new-teacher', 'newTeacher')->name('newTeacher');
+        Route::get('/teachers', 'teachers')->name('teachers');
+        Route::post('/store-teacher', 'storeTeacher')->name('storeTeacher');
+        Route::get('/teacher/{id}', 'teacher')->name('teacher');
     });
 
 });

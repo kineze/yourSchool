@@ -14,10 +14,10 @@
 
                 <div class="relative flex flex-col min-w-0 break-words bg-transparent border-0 shadow-none lg:py4 dark:bg-gray-950 rounded-2xl bg-clip-border">
                   <div class="p-6 justify-center  -ml-4 pb-0 flex flex-wrap items-center space-x-3 mb-0">
-                    <img class=" max-w-80" src="{{asset('assets/img/logo-2.png')}}" alt="logo">
+                    {{-- <img class=" max-w-80" src="{{asset('assets/img/royal-college.png')}}" alt="logo"> --}}
                     <div>
-                        {{-- <h4 class="font-bold text-2xl uppercase mb-0">Your School</h4> --}}
-                        {{-- <p class="font-semibold mb-0">Welcome! user, Log In now.</p> --}}
+                        <h4 class="font-bold text-2xl text-center uppercase mb-0">Admin Dashboard</h4>
+                        <p class="font-semibold text-center mb-0">Welcome! user, Log In now.</p>
                     </div>
                   </div>
 
@@ -64,7 +64,7 @@
                 </div>
               </div>
               <div class="absolute top-0 right-0 flex-col justify-center hidden w-6/12 h-full max-w-full px-3 pr-0 my-auto text-center flex-0 lg:flex">
-                <div class="relative flex flex-col justify-center h-full px-48 m-4 bg-contain bg-center bg-no-repeat rounded-xl" style="background-image: url({{asset('assets/img/3d-cover.webp')}})">
+                <div class="relative flex flex-col justify-center h-2/3 px-48 m-4 bg-contain bg-center bg-no-repeat rounded-xl" style="background-image: url({{asset('assets/img/nenamal-final-logo.webp')}})">
                   <img class="absolute left-0 opacity-40" src="https://demos.creative-tim.com/soft-ui-dashboard-pro/assets/img/shapes/pattern-lines.svg" alt="pattern-lines">
                 
                 </div>

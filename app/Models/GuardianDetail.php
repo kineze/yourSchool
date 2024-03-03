@@ -16,7 +16,7 @@ class GuardianDetail extends Model
         'profession',
         'phone_number',
         'guardian_nic',
-        'income',
+        'whatsapp_number',
     ];
 
     // Define the relationship with the Student model

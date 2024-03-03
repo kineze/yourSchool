@@ -63,16 +63,16 @@
                     </div>
                     <div class="w-8/12 max-w-full px-3 my-auto flex-0 sm:w-auto">
                         <div class="h-full">
-                            <h5 class="mb-1 font-bold dark:text-white">{{ $user->name }}</h5>
+                            <h5 class="mb-1 font-bold dark:text-white">{{ $userUpdate->name }}</h5>
                         </div>
                     </div>
                     <div class="flex max-w-full px-3 mt-4 gap-4 sm:flex-0 shrink-0 sm:mt-0 sm:ml-auto sm:w-auto">
-                        @foreach($user->roles as $role)
-                            @if($role->name === 'Authorization')
+                        @foreach($userUpdate->roles as $role)
+                            @if($role->name === 'Admin')
                                 <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-slate-200 text-slate-650 align-baseline font-bold uppercase leading-none">{{ $role->name }}</span>
-                            @elseif($role->name === 'Enterer')
+                            @elseif($role->name === 'Teacher')
                                 <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-lime-200 text-lime-600 align-baseline font-bold uppercase leading-none">{{ $role->name }}</span>
-                            @elseif($role->name === 'docManager')
+                            @elseif($role->name === 'Student')
                                 <span class="py-2.2 px-3.6 text-xs rounded-1.8 inline-block whitespace-nowrap text-center bg-lime-200 text-lime-600 align-baseline font-bold uppercase leading-none">{{ $role->name }}</span>
                             @endif
                         @endforeach
@@ -91,7 +91,7 @@
 
             <div class="relative flex flex-col min-w-0 mt-6 break-words bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border" id="basic-info">
                 <div class="flex-auto pt-0">
-                    <form class="relative" id="user-data"  action="{{route( 'updateUser', $user->id )}}" method="post">
+                    <form class="relative" id="user-data"  action="{{route( 'updateUser', $userUpdate->id )}}" method="post">
                         @csrf
                         <div active form="info" class="
                             flex flex-col visible p-12 w-full h-auto min-w-0 first-letter:break-words bg-white border-0 opacity-100 dark:bg-gray-950 rounded-2xl bg-clip-border">
@@ -100,7 +100,7 @@
                                 <div class="flex flex-wrap -mx-3">
                                     <div class="w-full max-w-full px-3 flex-0">
                                         <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="UserName">UserName</label>
-                                        <input type="text" name="UserName" value="{{$user->name}}" placeholder="username" class="{{ $errors->has('UserName') ? 'border-red-500' : 'border-gray-300' }}  focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none"/>
+                                        <input type="text" name="UserName" value="{{$userUpdate->name}}" placeholder="username" class="{{ $errors->has('UserName') ? 'border-red-500' : 'border-gray-300' }}  focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none"/>
                                         @error('UserName')
                                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                         @enderror
@@ -111,81 +111,88 @@
                                 <div class="flex flex-wrap -mx-3">
                                     <div class="w-full max-w-full px-3 mt-4 flex-0 sm:w-6/12 sm:mt-0">
                                         <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="email">Email</label>
-                                        <input type="email" name="email" value="{{$user->email}}" placeholder="example@org.com"  class="{{ $errors->has('email') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none"/>
+                                        <input type="email" name="email" value="{{$userUpdate->email}}" placeholder="example@org.com"  class="{{ $errors->has('email') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none"/>
                                         @error('email')
                                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                         @enderror
                                     </div>
                                     <div class="w-full max-w-full px-3 flex-0 sm:w-6/12">
                                         <label class="mt-6 mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80" for="phone">Phone</label>
-                                        <input type="text" name="phone" value="{{$user->phone}}" placeholder="XXXXXXXXXX" class="{{ $errors->has('phone') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" />
+                                        <input type="text" name="phone" value="{{$userUpdate->phone}}" placeholder="XXXXXXXXXX" class="{{ $errors->has('phone') ? 'border-red-500' : 'border-gray-300' }} focus:shadow-soft-primary-outline dark:bg-gray-950 dark:placeholder:text-white/80 dark:text-white/80 text-sm leading-5.6 ease-soft block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-black focus:outline-none" />
                                         @error('phone')
                                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                                         @enderror
                                     </div>
                                 </div>
 
+                                @if(in_array("Teacher", $userRoles))
+                                    <div class=" hidden h-fit w-full sm:grid-cols-1 gap-2">
 
-                                <div class="flex-auto">
-                                    <h5 class="font-bold dark:text-white">Access Levels</h5>
-                
-                                    @if ($errors->has('roles'))
-                                        <p class="text-red-500 text-xs mt-1">{{ $errors->first('roles') }}</p>
-                                    @endif
-                                    
-                                    <div class="flex justify-between flex-wrap h-fit w-full">
-                
-                                        @role('Admin')
-                                        <div class="flex lg:space-x-4 justify-between py-2 w-full">
-                                            <div class="lg:w-6/12 relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                                                <label>
-                                                <input  id="checkbox-1" name="roles[]" value="Admin" {{ in_array('Admin', $userRoles) ? 'checked' : '' }} class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                                                <label for="checkbox-1" class="cursor-pointer select-none text-slate-700">Admin</label>
-                                                </label>
-                                            </div>
-                                            
-                                            <div class=" lg:w-6/12 relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                                                <label>
-                                                <input id="checkbox-2" name="roles[]" value="Manager" {{ in_array('Manager', $userRoles) ? 'checked' : '' }} class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                                                <label for="checkbox-2" class="cursor-pointer select-none text-slate-700">Manager</label>
-                                                </label>
-                                            </div>
+                                        <div class="relative flex {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
+                                            <label>
+                                            <input id="checkbox-4" name="roles[]" value="Teacher" class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" checked/>
+                                            <label for="checkbox-4" class="cursor-pointer select-none text-slate-700">Teacher</label>
+                                            </label>
                                         </div>
-                                        @endrole
-                
-                                        @role('Admin|Manager')
-                                        <div class="flex justify-between lg:space-x-4 py-2 w-full">
-                                            <div class=" lg:w-6/12 relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                                                <label>
-                                                <input id="checkbox-3" name="roles[]" value="Coordinator" {{ in_array('Coordinator', $userRoles) ? 'checked' : '' }} class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                                                <label for="checkbox-3" class="cursor-pointer select-none text-slate-700">Coordinator</label>
-                                                </label>
+            
+                                </div>
+                                @endif
+
+                                @if(!in_array("Teacher", $userRoles))
+                                    <div class="flex-auto mt-4">
+                                        <h5 class="font-bold dark:text-white">Access Levels</h5>
+                    
+                                        @if ($errors->has('roles'))
+                                            <p class="text-red-500 text-xs mt-1">{{ $errors->first('roles') }}</p>
+                                        @endif
+                                        
+                                        <div class="flex justify-between flex-wrap h-fit w-full">
+                    
+                                            @role('Admin')
+                                            <div class="flex lg:space-x-4 justify-between py-2 w-full">
+                                                <div class="lg:w-6/12 relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
+                                                    <label>
+                                                    <input  id="checkbox-1" name="roles[]" value="Admin" {{ in_array('Admin', $userRoles) ? 'checked' : '' }} class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                                    <label for="checkbox-1" class="cursor-pointer select-none text-slate-700">Admin</label>
+                                                    </label>
+                                                </div>
+                                                
+                                                <div class=" lg:w-6/12 relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
+                                                    <label>
+                                                    <input id="checkbox-2" name="roles[]" value="Manager" {{ in_array('Manager', $userRoles) ? 'checked' : '' }} class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                                    <label for="checkbox-2" class="cursor-pointer select-none text-slate-700">Manager</label>
+                                                    </label>
+                                                </div>
                                             </div>
-                
-                                            <div class=" lg:w-6/12 relative flex {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
-                                                <label>
-                                                <input id="checkbox-4" name="roles[]" value="Consultant" {{ in_array('Teacher', $userRoles) ? 'checked' : '' }} class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
-                                                <label for="checkbox-4" class="cursor-pointer select-none text-slate-700">Teacher</label>
-                                                </label>
-                                            </div>
-                                            </div>
-                
-                                            <div class="flex py-2 lg:space-x-4 justify-between mr-3 w-full">
+                                            @endrole
+                    
+                                            @role('Admin|Manager')
+                                            <div class="flex justify-between lg:space-x-4 py-2 w-full">
+                                                <div class=" lg:w-6/12 relative {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
+                                                    <label>
+                                                    <input id="checkbox-3" name="roles[]" value="Coordinator" {{ in_array('Coordinator', $userRoles) ? 'checked' : '' }} class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
+                                                    <label for="checkbox-3" class="cursor-pointer select-none text-slate-700">Coordinator</label>
+                                                    </label>
+                                                </div>
+
                                                 <div class="w-6/12 relative flex {{ $errors->has('roles') ? 'border-red-500' : 'border-gray-300' }} flex-col h-fit bg-white p-5 rounded-lg border-0.4 border-gray-300 cursor-pointer">
                                                     <label>
                                                     <input id="checkbox-5" name="roles[]" value="Finance" {{ in_array('Finance', $userRoles) ? 'checked' : '' }} class="w-5 h-5 ease-soft text-base mr-4 rounded-1.4 checked:bg-gradient-to-tl checked:from-gray-900 checked:to-slate-800 after:text-xxs after:font-awesome after:duration-250 after:ease-soft-in-out duration-250 relative float-left mt-1 cursor-pointer appearance-none border border-solid border-slate-150 bg-white bg-contain bg-center bg-no-repeat align-top transition-all after:absolute after:flex after:h-full after:w-full after:items-center after:justify-center after:text-white after:opacity-0 after:transition-all after:content-['\f00c'] checked:border-0 checked:border-transparent checked:bg-transparent checked:after:opacity-100" type="checkbox" />
                                                     <label for="checkbox-5" class="cursor-pointer select-none text-slate-700">Finance</label>
                                                     </label>
                                                 </div>
-                                            </div>
-                                        @endrole
-                
-                
+                                                </div>
+                    
+                                            
+                                            @endrole
+                    
+                    
+                                        </div>
+                            
+                            
                                     </div>
-                        
-                        
-                                </div>
-
+                                @endif
+                    
                                     
                                 <button type="submit" href="javascript:;" class="inline-block float-right px-8 py-2 mt-16 mb-0 font-bold text-right text-white uppercase align-middle transition-all border-0 rounded-lg cursor-pointer hover:scale-102 active:opacity-85 hover:shadow-soft-xs dark:bg-gradient-to-tl dark:from-slate-850 dark:to-gray-850 bg-gradient-to-tl from-gray-900 to-slate-800 leading-pro text-xs ease-soft-in tracking-tight-soft shadow-soft-md bg-150 bg-x-25">Update User</button>
 
@@ -197,7 +204,7 @@
             <div class="relative flex flex-col min-w-0 mt-6 break-words bg-white border-0 dark:bg-gray-950 dark:shadow-soft-dark-xl shadow-soft-xl rounded-2xl bg-clip-border" id="password">
                 <div class="p-6">
                     
-                    <form class="relative" id="password-reset"  action="{{ route('updateUserPassword', $user->id ) }}" method="POST">
+                    <form class="relative" id="password-reset"  action="{{ route('updateUserPassword', $userUpdate->id ) }}" method="POST">
                         @csrf
                         <div class="flex-auto p-6 pt-0">
                         <h5 class="mb-0 font-bold dark:text-white">Password Reset</h5>

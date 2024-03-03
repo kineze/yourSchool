@@ -45,7 +45,7 @@
                         <th>User Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
-                        <th>counselor</th>
+                        <th>Teacher</th>
                         <th>status</th>
                         <th>Action</th>
                     </tr>
@@ -155,9 +155,9 @@
 
                             <td class="font-semibold leading-tight text-xs">
                                 <div class="flex items-center">
-                                    ${student.consultant_id !== null ?
-                                        `<span class="m-2 inline-block rounded-full border border-blue-600 px-2.5 w-19 text-center py-1 text-xs font-medium text-blue-600">TRUE</span>` :
-                                        `<span class="m-2 inline-block rounded-full border border-red-600 px-2.5 w-19 text-center py-1 text-xs font-medium text-red-600">FALSE</span>`
+                                    ${student.class !== null && student.school_class !== null ?
+                                        `<span class="m-2 inline-block rounded-full border border-blue-600 px-2.5  text-center py-1 text-xs font-medium text-blue-600">${student.school_class.name}</span>` :
+                                        `<span class="m-2 inline-block rounded-full border border-red-600 px-2.5  text-center py-1 text-xs font-medium text-red-600">N/A</span>`
                                     }
                                 </div>
                             </td>
@@ -168,7 +168,7 @@
                                         `<span class="m-2 inline-block rounded-full border text-center w-19 px-2.5 py-1 text-xs font-medium bg-gradient-to-tl from-blue-600 to-cyan-400 text-white">Fresh</span>` :
                                         (student.student_type === 'positive_inquiry' ?
                                             `<span class="m-2 inline-block rounded-full text-center w-19 px-2.5 py-1 text-xs font-medium bg-gradient-to-tl from-green-600 to-lime-400 text-white">Positive</span>` :
-                                            `<span class="m-2 inline-block text-center rounded-full w-19 px-2.5 py-1 text-xs font-medium bg-gradient-to-tl from-red-600 to-rose-400 text-white">Negative</span>`
+                                            `<span class="m-2 inline-block text-center rounded-full w-19 px-2.5 py-1 text-xs font-medium bg-gradient-to-tl from-green-600 to-lime-400 text-white">Active</span>`
                                         )
                                     }
                                 </span>
