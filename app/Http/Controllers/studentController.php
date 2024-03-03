@@ -16,6 +16,7 @@ use App\Models\GuardianDetail;
 use App\Models\SchoolClass;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -84,7 +85,7 @@ class studentController extends Controller
         $user->name = $request->UserName;
         $user->user_name = $request->admission_id;
         $user->phone = $request->phone;
-        $user->password = $request->admission_id;
+        $user->password = Hash::make($request->admission_id);
 
         $user->save();
 
@@ -241,6 +242,10 @@ class studentController extends Controller
 
         $student = Student::findOrFail($id);
 
+        $user = $student->user;
+
+        $user->delete();
+
         $student->delete();
 
         $notification = [
@@ -291,7 +296,7 @@ class studentController extends Controller
         $user->name = $request->UserName;
         $user->user_name = $request->admission_id;
         $user->phone = $request->phone;
-        $user->password = $request->admission_id;
+        $user->password = Hash::make($request->admission_id);
 
         $user->save();
 
