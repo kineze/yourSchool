@@ -9,6 +9,7 @@ use App\Models\TimeSlot;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use App\Models\SchoolClass;
 use Illuminate\Support\Facades\Auth;
 
 class dashboardController extends Controller
@@ -22,9 +23,9 @@ class dashboardController extends Controller
 
         $teachers = User::role('Teacher')->get();
 
-        $appointment = Appointment::get();
+        $classes = SchoolClass::get();
 
-        return view('admin.dashboard', compact('user', 'students','teachers', 'appointment'));
+        return view('admin.dashboard', compact('user', 'students','teachers', 'classes'));
     }
 
     public function getTimeSlots(){

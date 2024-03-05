@@ -57,7 +57,7 @@
                         <div>
                           <p class="mb-0 font-sans font-semibold leading-normal text-sm">Classes</p>
                           <h5 class="mb-0 font-bold dark:text-white">
-                            {{count($appointment)}}
+                            {{count($classes)}}
                           </h5>
                         </div>
                       </div>
