@@ -1,18 +1,23 @@
+function toggleCollapse(trigger) {
+  var collapse = trigger.nextElementSibling;
+  var collapse_height = collapse.scrollHeight;
+
+  if (trigger.getAttribute("aria-expanded") == "true") {
+    close_collapse(trigger, collapse, collapse_height);
+  } else {
+    open_collapse(trigger, collapse, collapse_height);
+  }
+}
+
+function closeAllCollapses() {
+  collapse_triggers.forEach((trigger) => {
+    toggleCollapse(trigger);
+  });
+}
+
 var collapse_triggers = document.querySelectorAll("[collapse_trigger]");
 
-collapse_triggers.forEach((trigger) => {
-  var collapse = trigger.nextElementSibling;
-
-  trigger.addEventListener("click", function () {
-    if (trigger.getAttribute("aria-expanded") == "true") {
-      var collapse_height = collapse.scrollHeight;
-      close_collapse(trigger, collapse, collapse_height);
-    } else {
-      var collapse_height = collapse.scrollHeight;
-      open_collapse(trigger, collapse, collapse_height);
-    }
-  });
-});
+closeAllCollapses();
 
 function open_collapse(trigger, collapse, height) {
   trigger.classList.remove("after:text-slate-800/50");
@@ -56,62 +61,59 @@ function close_collapse(trigger, collapse, height) {
   trigger.setAttribute("aria-expanded", "false");
 }
 
-var page = window.location.pathname.split("/").pop().split(".")[0];
-var aux = window.location.pathname.split("/");
-// var to_build = (aux.includes('pages')?'../':'./');
-// var root = window.location.pathname.split("/")
-// if (!aux.includes("pages")) {
-//   page = "dashboard";
+collapse_triggers.forEach((trigger) => {
+  trigger.addEventListener("click", function () {
+    toggleCollapse(trigger);
+  });
+});
+
+// // The rest of your existing code for setting up active pages
+// var page_name = window.location.pathname.split("/");
+// var current_page = page_name.pop();
+// var parent_page = page_name.pop();
+// var root_page = page_name.pop();
+// var root_folder = page_name.pop();
+
+// if (root_folder == "pages") {
+//   var a_href = "../../../pages/" + root_page + "/" + parent_page + "/" + current_page;
+
+//   var active_page = document.querySelector('a[href="' + a_href + '"]');
+//   var active_secondary = active_page.closest("div").previousElementSibling;
+
+//   var active_primary = active_secondary.closest("div").previousElementSibling;
+//   var active_primary_icon = active_primary.querySelector("div");
+//   var active_primary_icon_fills = active_primary_icon.querySelectorAll(".fill-slate-800");
+
+//   active_primary.setAttribute("active_primary", "");
+
+//   active_primary.nextElementSibling.style.maxHeight = active_primary.nextElementSibling.scrollHeight + active_secondary.nextElementSibling.scrollHeight + "px";
+//   active_secondary.nextElementSibling.style.maxHeight = active_secondary.nextElementSibling.scrollHeight + "px";
+// } else if (aux.includes("pages")) {
+//   root_folder = root_page;
+//   root_page = parent_page;
+//   parent_page = current_page;
+
+//   var a_href = "../../pages/" + root_page + "/" + parent_page;
+
+//   var active_page = document.querySelector('a[href="' + a_href + '"]');
+//   active_page.setAttribute("active_page", "");
+//   active_page.setAttribute("active_secondary", "");
+
+//   var active_primary = active_page.closest("div").previousElementSibling;
+//   var active_primary_icon = active_primary.querySelector("div");
+//   var active_primary_icon_fills = active_primary_icon.querySelectorAll(".fill-slate-800");
+
+//   active_primary.nextElementSibling.style.maxHeight = active_primary.nextElementSibling.scrollHeight + "px";
+// } else {
+//   var a_href = "./pages/dashboards/default.html";
+
+//   var active_page = document.querySelector('a[href="' + a_href + '"]');
+//   active_page.setAttribute("active_page", "");
+//   active_page.setAttribute("active_secondary", "");
+
+//   var active_primary = active_page.closest("div").previousElementSibling;
+//   var active_primary_icon = active_primary.querySelector("div");
+//   var active_primary_icon_fills = active_primary_icon.querySelectorAll(".fill-slate-800");
+
+//   active_primary.nextElementSibling.style.maxHeight = active_primary.nextElementSibling.scrollHeight + "px"; 
 // }
-
-var page_name = window.location.pathname.split("/");
-var current_page = page_name.pop();
-var parent_page = page_name.pop();
-var root_page = page_name.pop();
-var root_folder = page_name.pop();
-
-
-
-if (root_folder == "pages") {
-  var a_href = "../../../pages/" + root_page + "/" + parent_page + "/" + current_page;
-
-  var active_page = document.querySelector('a[href="' + a_href + '"]');
-  var active_secondary = active_page.closest("div").previousElementSibling;
-
-  var active_primary = active_secondary.closest("div").previousElementSibling;
-  var active_primary_icon = active_primary.querySelector("div");
-  var active_primary_icon_fills = active_primary_icon.querySelectorAll(".fill-slate-800");
-
-  active_primary.setAttribute("active_primary", "");
-
-  active_primary.nextElementSibling.style.maxHeight = active_primary.nextElementSibling.scrollHeight + active_secondary.nextElementSibling.scrollHeight + "px";
-  active_secondary.nextElementSibling.style.maxHeight = active_secondary.nextElementSibling.scrollHeight + "px";
-} else if(aux.includes("pages")) {
-  root_folder = root_page;
-  root_page = parent_page;
-  parent_page = current_page;
-
-  var a_href = "../../pages/" + root_page + "/" + parent_page;
-
-  var active_page = document.querySelector('a[href="' + a_href + '"]');
-  active_page.setAttribute("active_page", "");
-  active_page.setAttribute("active_secondary", "");
-
-  var active_primary = active_page.closest("div").previousElementSibling;
-  var active_primary_icon = active_primary.querySelector("div");
-  var active_primary_icon_fills = active_primary_icon.querySelectorAll(".fill-slate-800");
-
-  active_primary.nextElementSibling.style.maxHeight = active_primary.nextElementSibling.scrollHeight + "px";
-} else {
-  var a_href = "./pages/dashboards/default.html";
-
-  var active_page = document.querySelector('a[href="' + a_href + '"]');
-  active_page.setAttribute("active_page", "");
-  active_page.setAttribute("active_secondary", "");
-
-  var active_primary = active_page.closest("div").previousElementSibling;
-  var active_primary_icon = active_primary.querySelector("div");
-  var active_primary_icon_fills = active_primary_icon.querySelectorAll(".fill-slate-800");
-
-  active_primary.nextElementSibling.style.maxHeight = active_primary.nextElementSibling.scrollHeight + "px"; 
-}

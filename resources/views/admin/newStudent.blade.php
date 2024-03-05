@@ -53,10 +53,10 @@
                     <div class="w-full max-w-full flex-0">
                         <div class=" mt-8 inline-flex w-full items-center justify-center relative text-white transition-all duration-200 text-base ease-soft-in-out rounded-xl">
                             <div class="grid h-fit w-full sm:grid-cols-2 gap-6">
-                                <label for="plan-growth" class="relative flex flex-col bg-white p-5 rounded-lg shadow-md cursor-pointer">
-                                <span class="font-semibold text-gray-500 leading-tight uppercase mb-3">Nenamal Royal <br> College - Kelaniya</span>
-                                <input type="radio" name="location" id="plan-growth" value="1" class="absolute h-0 w-0 appearance-none" checked />
-                                <span aria-hidden="true" class="hidden absolute inset-0 border-2 border-blue-500 bg-blue-200 bg-opacity-10 rounded-lg">
+                                <label for="plan-hobby" class="relative flex flex-col h-fit bg-white p-5 rounded-lg shadow-md cursor-pointer">
+                                <span class="font-semibold text-gray-500 leading-tight uppercase mb-3">Nenamal Royal <br> College - Mawaramandiya</span>
+                                <input type="radio" name="location" id="plan-hobby" value="2" class="absolute h-0 w-0 appearance-none" checked />
+                                <span aria-hidden="true" class="hidden absolute inset-0 border-2 border-blue-500 bg-blue-200 bg-opacity-20 rounded-lg">
                                     <span class="absolute top-4 right-4 h-6 w-6 inline-flex items-center justify-center rounded-full bg-blue-200">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-blue-600">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
@@ -64,10 +64,10 @@
                                     </span>
                                 </span>
                                 </label>
-                                <label for="plan-hobby" class="relative flex flex-col h-fit bg-white p-5 rounded-lg shadow-md cursor-pointer">
-                                <span class="font-semibold text-gray-500 leading-tight uppercase mb-3">Nenamal Royal <br> College - Mawaramandiya</span>
-                                <input type="radio" name="location" id="plan-hobby" value="2" class="absolute h-0 w-0 appearance-none" />
-                                <span aria-hidden="true" class="hidden absolute inset-0 border-2 border-blue-500 bg-blue-200 bg-opacity-20 rounded-lg">
+                                <label for="plan-growth" class="relative flex flex-col bg-white p-5 rounded-lg shadow-md cursor-pointer">
+                                <span class="font-semibold text-gray-500 leading-tight uppercase mb-3">Nenamal Royal <br> College - Kelaniya</span>
+                                <input type="radio" name="location" id="plan-growth" value="1" class="absolute h-0 w-0 appearance-none" />
+                                <span aria-hidden="true" class="hidden absolute inset-0 border-2 border-blue-500 bg-blue-200 bg-opacity-10 rounded-lg">
                                     <span class="absolute top-4 right-4 h-6 w-6 inline-flex items-center justify-center rounded-full bg-blue-200">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5 text-blue-600">
                                         <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />

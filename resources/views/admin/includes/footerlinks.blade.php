@@ -190,6 +190,24 @@
 
 </script>
 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const dropdownTriggers = document.querySelectorAll("[collapse_trigger]");
+  
+      dropdownTriggers.forEach((trigger) => {
+        trigger.addEventListener("click", function () {
+          const targetId = this.getAttribute("aria-controls");
+          const targetElement = document.getElementById(targetId);
+  
+          if (targetElement) {
+            targetElement.classList.toggle("hidden");
+          }
+        });
+      });
+    });
+  </script>
+  
+
 
 
 
